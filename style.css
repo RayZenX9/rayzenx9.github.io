@@ -1,12 +1,11 @@
-```css
 /* RAYZENX — PS4 HOST */
 
 :root {
-    --bg: #0b0b0e;
-    --red: #ff263f;
-    --text: #f5f5f7;
-    --muted: #92929e;
-    --border: rgba(255, 255, 255, 0.15);
+    --bg: #050505;
+    --red: #ed1717;
+    --text: #f5f5f5;
+    --muted: #929292;
+    --border: rgba(237, 23, 23, 0.35);
 }
 
 * {
@@ -18,8 +17,8 @@ html {
     background-color: var(--bg);
     background-image:
         linear-gradient(
-            rgba(8, 8, 12, 0.76),
-            rgba(8, 8, 12, 0.94)
+            rgba(5, 5, 5, 0.78),
+            rgba(5, 5, 5, 0.95)
         ),
         url('img.jpg');
     background-position: center;
@@ -38,13 +37,15 @@ body {
     padding: 20px 14px;
 }
 
-/* TÍTULOS */
+/* CABEÇALHO */
 
 h1 {
     color: var(--text);
-    font-size: 25px;
+    font-size: 28px;
     line-height: 1.5;
-    text-shadow: 0.1em 0.1em 0.2em black;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-shadow: 0 0 18px rgba(237, 23, 23, 0.15);
     overflow-wrap: anywhere;
 }
 
@@ -53,8 +54,27 @@ h1 {
 hr {
     height: 1px;
     border: 0;
-    background: var(--border);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--red),
+        transparent
+    );
     margin: 18px 0;
+}
+
+/* MENSAGEM DO HOST */
+
+#msgs {
+    min-height: 100px;
+    margin: 77px 0 455px;
+    padding: 0 10px;
+    color: var(--text);
+    font-size: 30px;
+    line-height: 1.5;
+    font-weight: 700;
+    text-shadow: 0 0 18px rgba(237, 23, 23, 0.2);
+    overflow-wrap: anywhere;
 }
 
 /* LINKS */
@@ -62,37 +82,6 @@ hr {
 a {
     color: var(--red);
     text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-a:hover {
-    color: #ff7181;
-}
-
-/* MENSAGEM DO HOST */
-
-#msgs {
-    min-height: 100px;
-    margin-top: 77px;
-    margin-bottom: 455px;
-    padding: 0 10px;
-    font-size: 30px !important;
-    line-height: 1.5;
-    text-shadow: 0 0 18px rgba(255, 38, 63, 0.18);
-}
-
-/* AGRADECIMENTOS */
-
-h1:last-of-type {
-    margin-top: 43px;
-    font-size: 16px;
-    line-height: 2;
-}
-
-h1:last-of-type a {
-    color: var(--red) !important;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
 /* RESPONSIVIDADE */
@@ -103,50 +92,38 @@ h1:last-of-type a {
     }
 
     h1 {
-        font-size: 20px;
+        font-size: 23px;
     }
 
     #msgs {
         margin-top: 55px;
         margin-bottom: 200px;
-        font-size: 23px !important;
-    }
-
-    h1:last-of-type {
-        margin-top: 30px;
-        font-size: 14px;
-    }
-
-    h1:last-of-type a {
-        display: inline-block;
-        margin: 4px 6px;
+        font-size: 23px;
     }
 }
 
-/* CELULARES PEQUENOS */
+/* TELAS PEQUENAS */
 
 @media (max-width: 360px) {
     h1 {
-        font-size: 18px;
+        font-size: 19px;
     }
 
     #msgs {
-        font-size: 20px !important;
+        font-size: 20px;
         margin-bottom: 150px;
     }
-
-    h1:last-of-type {
-        font-size: 12px;
-    }
 }
 
-/* ACESSIBILIDADE */
+/* TELAS COM POUCA ALTURA */
 
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        transition: none !important;
+@media (max-height: 500px) {
+    body {
+        padding-top: 8px;
+    }
+
+    #msgs {
+        margin-top: 25px;
+        margin-bottom: 80px;
     }
 }
-```
