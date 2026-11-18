@@ -1,74 +1,30 @@
-
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RayZenX9 | GoldHEN Host</title>
-<link rel="stylesheet" href="../style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS4 [5.05] 7.00 - 14.02 | RayZenX</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-
-<h1 id="msgs">RayZenX9</h1>
-<hr>
-<br>
-
-<h1 style="font-size: 30px; margin-top: 77px; margin-bottom: 35px;">
-    RAYZENX9
-</h1>
-
-<p style="font-size: 18px; margin-bottom: 35px;">
-    HOST DE EXPLOIT PARA PLAYSTATION 4
-</p>
-
-<h1 id="status" style="font-size: 25px; margin-top: 35px; margin-bottom: 35px;">
-    GoldHEN
-</h1>
-
-<button class="btn" id="startBtn"
-    style="font-size: 22px; padding: 15px 35px;"
-    onclick="startExploit()">
-    PRESSIONE X PARA INICIAR
-</button>
-
-<h1 style="font-size: 16px; margin-top: 100px;">
-    Desenvolvido por:
-    <span style="color: #f31414; margin-left: 10px;">
-        RayZenX9
-    </span>
-</h1>
-
 <script>
 var uaFull = navigator.userAgent;
 var match = uaFull.match(/PlayStation 4[ /]([\d.]+)/i);
 var isPS4 = match !== null;
-var fwVersion = isPS4 ? match[1] : "Unknown";
+var fwVersion = isPS4 ? match[1] : "Desconhecida";
 var fwNum = parseFloat(fwVersion);
-var started = false;
 
 function onScriptError() {
-    document.getElementById("status").textContent =
-        "Conteúdo não encontrado! Limpe os dados do navegador e reinstale o cache.";
+    msgs.innerHTML = "Conteúdo não encontrado! Limpe os dados do navegador e instale o cache novamente.";
 }
 
-function startExploit() {
-    if (started) return;
-    started = true;
-
-    document.getElementById("startBtn").style.display = "none";
-
-    var status = document.getElementById("status");
-
-    if (!isPS4) {
-        status.textContent =
-            "Compatível com PS4 nos firmwares 5.05 e 7.00 até 14.02";
-        started = false;
-        return;
-    }
-
-    status.textContent = "Iniciando GoldHEN... Aguarde";
-
-    if (window.applicationCache.status == 0) {
+if (!isPS4) {
+    document.addEventListener("DOMContentLoaded", () => {
+        msgs.innerHTML = "Este host é compatível com o PS4 nos firmwares de 5.05 e de 7.00 até 14.02.";
+    });
+} else {
+    if (window.applicationCache.status == '0') {
         if (fwNum == 5.05 || fwNum == 5.07) {
             window.location.replace("cache505.html");
         } else if (fwNum >= 7.00 && fwNum <= 8.52) {
@@ -80,50 +36,72 @@ function startExploit() {
         } else if (fwNum >= 11.50 && fwNum <= 14.02) {
             window.location.replace("cacheslopkit.html");
         } else {
-            status.textContent = "Firmware não compatível: " + fwVersion;
-            document.getElementById("startBtn").style.display = "inline-block";
-            started = false;
+            document.addEventListener("DOMContentLoaded", () => {
+                msgs.innerHTML = 'Firmware não compatível: <span style="color: red;">' + fwVersion + '</span>';
+            });
         }
-        return;
-    }
-
-    var script = document.createElement("script");
-
-    if (fwNum == 5.05 || fwNum == 5.07) {
-        script.src = "505/exploit.js";
-    } else if (fwNum >= 7.00 && fwNum <= 8.52) {
-        script.type = "module";
-        script.src = "700/alert.js";
-    } else if (fwNum >= 9.00 && fwNum <= 9.60) {
-        script.type = "module";
-        script.src = "900/alert.js";
-    } else if (fwNum >= 10.00 && fwNum <= 11.02) {
-        script.src = "css/main.js";
-
-        script.onload = function() {
-            setTimeout(function() {
-                if (typeof doJb === "function") {
-                    doJb();
-                }
-            }, 500);
-        };
-    } else if (fwNum == 11.50 || fwNum == 11.52) {
-        script.type = "module";
-        script.src = "slopkit/chain_lapse.js";
-    } else if (fwNum >= 12.00 && fwNum <= 14.02) {
-        script.type = "module";
-        script.src = "slopkit/jb.js";
     } else {
-        status.textContent = "Firmware não compatível: " + fwVersion;
-        document.getElementById("startBtn").style.display = "inline-block";
-        started = false;
-        return;
+        if (fwNum == 5.05 || fwNum == 5.07) {
+            var script = document.createElement('script');
+            script.src = "505/exploit.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        }
+        else if (fwNum >= 7.00 && fwNum <= 8.52) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = "700/alert.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        }
+        else if (fwNum >= 9.00 && fwNum <= 9.60) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = "900/alert.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        }
+        else if (fwNum >= 10.00 && fwNum <= 11.02) {
+            var script = document.createElement('script');
+            script.src = "css/main.js";
+            script.onerror = onScriptError;
+            script.onload = function () {
+                setTimeout(function () {
+                    doJb();
+                }, 500);
+            };
+            document.head.appendChild(script);
+        }
+        else if (fwNum == 11.50 || fwNum == 11.52) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = "slopkit/chain_lapse.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        }
+        else if (fwNum >= 12.00 && fwNum <= 14.02) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = "slopkit/jb.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        }
     }
-
-    script.onerror = onScriptError;
-    document.head.appendChild(script);
 }
 </script>
 
+<h1>PS4 [5.05] 7.00 - 14.02 | RayZenX</h1>
+<hr>
+<br>
+<h1 id="msgs" style="font-size: 30px;margin-top: 77px;margin-bottom: 455px;">Carregando o GoldHEN v2.4b18.14... Aguarde</h1>
+
+<h1 style="margin-top: 43px;">Agradecimentos especiais a:
+    <a href="https://twitter.com/_AlAzif" style="color: #f31414;margin-left: 10px;margin-right: 10px;">@_AlAzif</a>
+    ChendoChap
+    <a href="https://x.com/Kameleonre_" style="color: #f31414;margin-left: 10px;margin-right: 10px;">@Kameleonre_</a>
+    SiSTR0 e Abc
+</h1>
+
 </body>
 </html>
+```
