@@ -1,0 +1,162 @@
+
+/* ==================================================
+   RAYZENX — PS4 HOST
+   Interface Premium Black & Red
+   ================================================== */
+
+:root {
+    --bg: #080808;
+    --panel: #101010;
+    --panel-light: #171717;
+    --red: #ff263f;
+    --red-light: #ff465b;
+    --text: #f5f5f5;
+    --muted: #929292;
+    --border: rgba(255, 38, 63, 0.30);
+    --radius: 14px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background: var(--bg);
+    color-scheme: dark;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container,
+.wrapper,
+.main-container {
+    width: min(100% - 32px, 900px);
+    margin-inline: auto;
+}
+
+.panel,
+.card,
+.main-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+h1,
+h2,
+h3 {
+    color: var(--text);
+    font-weight: 700;
+}
+
+p {
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+button,
+.btn,
+.start-button {
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.btn,
+.start-button {
+    border: 1px solid var(--red);
+    border-radius: 10px;
+    background: var(--red);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn:hover,
+.start-button:hover {
+    background: var(--red-light);
+}
+
+.btn:active,
+.start-button:active {
+    transform: scale(0.98);
+}
+
+button:disabled,
+.btn:disabled,
+.start-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.progress,
+.progress-bar-container {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #252525;
+}
+
+.progress-bar,
+.progress-fill {
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: var(--red);
+    transition: width 0.3s ease;
+}
+
+.status,
+.status-text {
+    color: var(--red);
+    font-weight: 700;
+}
+
+.muted,
+.hint,
+.description {
+    color: var(--muted);
+}
+
+a {
+    color: var(--red);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--red-light);
+}
+
+:focus-visible {
+    outline: 2px solid var(--red-light);
+    outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+    .container,
+    .wrapper,
+    .main-container {
+        width: calc(100% - 24px);
+    }
+}
