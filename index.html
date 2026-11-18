@@ -7,555 +7,274 @@
 
     <title>RayZenX — PS4 Multi Firmware</title>
 
-    <style>
-        :root {
-            --bg: #050505;
-            --red: #ed1717;
-            --red-light: #ff3838;
-            --text: #f5f5f5;
-            --muted: #929292;
-            --border: rgba(237, 23, 23, .35);
-        }
-
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html {
-            min-height: 100%;
-            background: var(--bg) url('img.jpg') center / cover fixed no-repeat;
-            color: var(--text);
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            margin: 0;
-            padding: 22px 14px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(
-                rgba(5, 5, 5, .80),
-                rgba(5, 5, 5, .95)
-            );
-        }
-
-        .container {
-            width: 100%;
-            max-width: 760px;
-            margin: auto;
-        }
-
-        .brand {
-            margin-bottom: 8px;
-            font-size: clamp(28px, 6vw, 43px);
-            font-weight: 900;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            text-shadow: 0 0 24px rgba(237, 23, 23, .3);
-        }
-
-        .brand span {
-            color: var(--red);
-        }
-
-        .subtitle {
-            color: var(--muted);
-            font-size: 12px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .line {
-            height: 1px;
-            margin: 25px 0;
-            border: 0;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                var(--red),
-                transparent
-            );
-        }
-
-        .panel {
-            padding: 30px 22px;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            background: rgba(8, 8, 8, .78);
-            box-shadow: 0 0 35px rgba(237, 23, 23, .07);
-        }
-
-        .eyebrow {
-            color: var(--red-light);
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        h1 {
-            margin: 18px 0 12px;
-            font-size: clamp(24px, 5vw, 36px);
-            line-height: 1.25;
-            font-weight: 900;
-        }
-
-        .description {
-            max-width: 530px;
-            margin: 0 auto;
-            color: #b8b8b8;
-            font-size: 15px;
-            line-height: 1.8;
-        }
-
-        .firmware {
-            display: inline-block;
-            margin-top: 22px;
-            padding: 10px 16px;
-            border: 1px solid var(--border);
-            border-radius: 7px;
-            background: rgba(237, 23, 23, .07);
-            color: var(--red-light);
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        button {
-            width: 100%;
-            max-width: 340px;
-            min-height: 58px;
-            margin-top: 28px;
-            padding: 15px 20px;
-            border: 1px solid var(--red-light);
-            border-radius: 8px;
-            background: linear-gradient(135deg, #f12626, #a90000);
-            color: white;
-            font-size: 15px;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-            box-shadow: 0 0 24px rgba(237, 23, 23, .18);
-        }
-
-        button:active {
-            background: #a90000;
-        }
-
-        button:disabled {
-            opacity: .6;
-            cursor: default;
-        }
-
-        .progress-area {
-            display: none;
-            margin-top: 28px;
-        }
-
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 10px;
-            color: var(--muted);
-            font-size: 12px;
-        }
-
-        #percentage {
-            color: var(--red-light);
-            font-weight: 800;
-        }
-
-        .progress-track {
-            width: 100%;
-            height: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            background: #191919;
-        }
-
-        #progressFill {
-            width: 0%;
-            height: 100%;
-            border-radius: inherit;
-            background: linear-gradient(90deg, #a90000, #ff3838);
-            box-shadow: 0 0 14px rgba(237, 23, 23, .35);
-            transition: width .3s ease;
-        }
-
-        #status {
-            min-height: 44px;
-            margin-top: 18px;
-            color: #c4c4c4;
-            font-size: 14px;
-            line-height: 1.7;
-        }
-
-        .footer {
-            margin-top: 22px;
-            color: #707070;
-            font-size: 11px;
-            letter-spacing: 1px;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 15px 10px;
-            }
-
-            .panel {
-                padding: 25px 16px;
-            }
-
-            .subtitle {
-                font-size: 10px;
-                letter-spacing: 2px;
-            }
-
-            .description {
-                font-size: 14px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <main class="container">
-        <header>
-            <div class="brand">RAYZEN<span>X</span></div>
-            <div class="subtitle">Ambiente Multi Firmware</div>
-        </header>
+        <h1>SEU CONSOLE DESBLOQUEADO</h1>
 
-        <hr class="line">
+        <hr>
 
-        <section class="panel">
-            <div class="eyebrow" id="eyebrow">Sistema de inicialização</div>
+        <p class="subtitle">Ambiente RayZenX Multi Firmware</p>
 
-            <h1 id="title">Seu console desbloqueado.</h1>
+        <div id="msgs">
+            Seu sistema será identificado e o desbloqueio será iniciado.
+        </div>
 
-            <p class="description" id="description">
-                Ambiente RayZenX Multi Firmware.<br>
-                Seu sistema será identificado e o processo de desbloqueio
-                será iniciado automaticamente após a confirmação.
+        <p id="firmware">
+            Identificando firmware...
+        </p>
+
+        <button id="startBtn" type="button">
+            ✕ &nbsp; APERTE X PARA COMEÇAR
+        </button>
+
+        <div id="progressArea" style="display:none;">
+            <p id="status" aria-live="polite">
+                Preparando o ambiente...
             </p>
 
-            <div class="firmware" id="firmware">
-                Firmware: verificando sistema...
-            </div>
+            <progress id="progressBar" value="0" max="100"></progress>
 
-            <button id="startButton" type="button">
-                ✕ &nbsp; APERTE X PARA COMEÇAR
-            </button>
+            <div id="progressText">0%</div>
+        </div>
 
-            <div class="progress-area" id="progressArea">
-                <div class="progress-info">
-                    <span id="progressLabel">Preparando ambiente...</span>
-                    <span id="percentage">0%</span>
-                </div>
+        <hr>
 
-                <div class="progress-track">
-                    <div id="progressFill"></div>
-                </div>
-            </div>
-
-            <div id="status" aria-live="polite">
-                Aguardando confirmação para iniciar.
-            </div>
-        </section>
-
-        <footer class="footer">
-            RAYZENX © 2026 — PS4 MULTI FIRMWARE
-        </footer>
+        <p>
+            <small>RAYZENX · MULTI FIRMWARE</small>
+        </p>
     </main>
 
     <script>
-        (() => {
-            "use strict";
+    (() => {
+        "use strict";
 
-            const $ = id => document.getElementById(id);
+        const $ = id => document.getElementById(id);
 
-            const title = $("title");
-            const description = $("description");
-            const eyebrow = $("eyebrow");
-            const firmwareLabel = $("firmware");
-            const button = $("startButton");
-            const status = $("status");
-            const progressArea = $("progressArea");
-            const progressLabel = $("progressLabel");
-            const percentage = $("percentage");
-            const progressFill = $("progressFill");
+        const messages = $("msgs");
+        const firmwareLabel = $("firmware");
+        const button = $("startBtn");
+        const progressArea = $("progressArea");
+        const progressBar = $("progressBar");
+        const progressText = $("progressText");
+        const status = $("status");
 
-            let started = false;
-            let progressTimer = null;
+        let started = false;
 
-            const ua = navigator.userAgent;
-            const match = ua.match(/PlayStation 4[ /]([\d.]+)/i);
-            const firmware = match ? match[1] : null;
-            const fw = firmware ? parseFloat(firmware) : NaN;
+        const match = navigator.userAgent.match(
+            /PlayStation 4[ /]([\d.]+)/i
+        );
 
-            let config = null;
+        const firmware = match ? match[1] : null;
+        const version = firmware ? parseFloat(firmware) : NaN;
 
-            if (firmware) {
-                if (fw === 5.05 || fw === 5.07) {
-                    config = {
-                        name: firmware,
-                        cache: "cache505.html",
-                        script: "505/exploit.js",
-                        module: false
-                    };
-                } else if (fw >= 7.00 && fw <= 8.52) {
-                    config = {
-                        name: firmware,
-                        cache: "cache700.html",
-                        script: "700/alert.js",
-                        module: true
-                    };
-                } else if (fw >= 9.00 && fw <= 9.60) {
-                    config = {
-                        name: firmware,
-                        cache: "cache900.html",
-                        script: "900/alert.js",
-                        module: true
-                    };
-                } else if (fw >= 10.00 && fw <= 11.02) {
-                    config = {
-                        name: firmware,
-                        cache: "cachecss.html",
-                        script: "css/main.js",
-                        module: false,
-                        runDoJb: true
-                    };
-                } else if (fw === 11.50 || fw === 11.52) {
-                    config = {
-                        name: firmware,
-                        cache: "cacheslopkit.html",
-                        script: "slopkit/chain_lapse.js",
-                        module: true
-                    };
-                } else if (fw >= 12.00 && fw <= 14.02) {
-                    config = {
-                        name: firmware,
-                        cache: "cacheslopkit.html",
-                        script: "slopkit/jb.js",
-                        module: true
-                    };
-                }
+        let config = null;
+
+        if (firmware) {
+            if (version === 5.05 || version === 5.07) {
+                config = {
+                    cache: "cache505.html",
+                    script: "505/exploit.js",
+                    module: false
+                };
+            } else if (version >= 7.00 && version <= 8.52) {
+                config = {
+                    cache: "cache700.html",
+                    script: "700/alert.js",
+                    module: true
+                };
+            } else if (version >= 9.00 && version <= 9.60) {
+                config = {
+                    cache: "cache900.html",
+                    script: "900/alert.js",
+                    module: true
+                };
+            } else if (version >= 10.00 && version <= 11.02) {
+                config = {
+                    cache: "cachecss.html",
+                    script: "css/main.js",
+                    module: false,
+                    runDoJb: true
+                };
+            } else if (version === 11.50 || version === 11.52) {
+                config = {
+                    cache: "cacheslopkit.html",
+                    script: "slopkit/chain_lapse.js",
+                    module: true
+                };
+            } else if (version >= 12.00 && version <= 14.02) {
+                config = {
+                    cache: "cacheslopkit.html",
+                    script: "slopkit/jb.js",
+                    module: true
+                };
             }
+        }
 
-            firmwareLabel.textContent = firmware
-                ? "Firmware detectado: " + firmware
-                : "Firmware: não identificado";
+        if (!match) {
+            firmwareLabel.textContent = "Console não identificado";
+            messages.textContent =
+                "Abra o RayZenX pelo navegador do seu PS4.";
+            button.disabled = true;
+            button.textContent = "NAVEGADOR NÃO IDENTIFICADO";
+        } else if (!config) {
+            firmwareLabel.textContent =
+                "Firmware detectado: " + firmware;
+            messages.textContent =
+                "Este firmware não está disponível neste host.";
+            button.disabled = true;
+            button.textContent = "FIRMWARE NÃO SUPORTADO";
+        } else {
+            firmwareLabel.textContent =
+                "Firmware detectado: " + firmware;
+        }
 
-            if (!match) {
-                title.textContent = "Acesse pelo navegador do PS4";
-                description.textContent =
-                    "O RayZenX precisa ser aberto no navegador do console para identificar o firmware corretamente.";
-                status.textContent = "Nenhum console PS4 foi identificado.";
-                button.disabled = true;
-                button.textContent = "NAVEGADOR NÃO COMPATÍVEL";
-            } else if (!config) {
-                title.textContent = "Firmware não suportado";
-                description.textContent =
-                    "Esta versão não está na lista de firmwares configurados neste host.";
-                status.textContent = "Firmware detectado: " + firmware;
-                button.disabled = true;
-                button.textContent = "FIRMWARE NÃO SUPORTADO";
+        function updateProgress(value, text) {
+            const percentage = Math.max(
+                0,
+                Math.min(100, Math.round(value))
+            );
+
+            progressBar.value = percentage;
+            progressText.textContent = percentage + "%";
+
+            if (text) {
+                status.textContent = text;
             }
+        }
 
-            function setProgress(value, label) {
-                const amount = Math.max(0, Math.min(100, value));
-                progressFill.style.width = amount + "%";
-                percentage.textContent = Math.round(amount) + "%";
-                if (label) progressLabel.textContent = label;
-            }
+        function showError(message) {
+            messages.textContent = "Não foi possível continuar.";
+            status.textContent = message;
+            button.disabled = false;
+            button.classList.remove("hidden");
+            button.style.display = "inline-block";
+            started = false;
+        }
 
-            function showCacheInstructions() {
-                eyebrow.textContent = "Instalação do cache";
-                title.textContent = "Preparando o ambiente";
-                description.textContent =
-                    "O cache está sendo preparado para facilitar os próximos acessos ao RayZenX.";
-                firmwareLabel.textContent = "Firmware detectado: " + firmware;
-                button.classList.add("hidden");
-                progressArea.style.display = "block";
-                status.textContent = "Aguarde enquanto o navegador processa o cache.";
-            }
+        function startHost() {
+            if (started || !config) return;
 
-            function startCacheInstallation() {
-                showCacheInstructions();
+            started = true;
+            button.disabled = true;
+            button.style.display = "none";
+            progressArea.style.display = "block";
 
+            messages.textContent =
+                "Identificando sistema e preparando o desbloqueio...";
+
+            updateProgress(5, "Verificando o ambiente...");
+
+            /*
+             * Mantém o comportamento do host original:
+             * se o cache ainda não estiver instalado, abre
+             * a página de cache correspondente ao firmware.
+             */
+            try {
                 const appCache = window.applicationCache;
 
-                if (!appCache) {
-                    title.textContent = "Cache não disponível";
-                    description.textContent =
-                        "Este navegador não disponibilizou o recurso de cache de aplicação necessário para esta etapa.";
+                if (
+                    appCache &&
+                    appCache.status === appCache.UNCACHED
+                ) {
                     status.textContent =
-                        "Verifique a configuração do host e do navegador antes de continuar.";
-                    return;
-                }
-
-                let finished = false;
-
-                function finishCache(success) {
-                    if (finished) return;
-                    finished = true;
-                    appCache.removeEventListener("progress", onProgress);
-                    appCache.removeEventListener("cached", onCached);
-                    appCache.removeEventListener("noupdate", onNoUpdate);
-                    appCache.removeEventListener("error", onError);
-
-                    if (success) {
-                        setProgress(100, "Cache instalado");
-                        title.textContent = "Cache instalado com sucesso!";
-                        description.textContent =
-                            "Agora feche o navegador do PS4 completamente e abra-o novamente para continuar.";
-                        status.textContent =
-                            "Cache preparado. Feche e reabra o navegador do console.";
-                    } else {
-                        title.textContent = "Não foi possível instalar o cache";
-                        description.textContent =
-                            "Confira sua conexão e a configuração do host. Se necessário, limpe os dados do navegador e tente novamente.";
-                        status.textContent =
-                            "A instalação do cache não foi confirmada.";
-                    }
-                }
-
-                function onProgress(event) {
-                    if (event.lengthComputable && event.total > 0) {
-                        setProgress(
-                            event.loaded / event.total * 100,
-                            "Instalando cache..."
-                        );
-                    } else {
-                        setProgress(
-                            Math.min(90, parseFloat(percentage.textContent) + 5),
-                            "Instalando cache..."
-                        );
-                    }
-                }
-
-                function onCached() {
-                    finishCache(true);
-                }
-
-                function onNoUpdate() {
-                    finishCache(true);
-                }
-
-                function onError() {
-                    finishCache(false);
-                }
-
-                appCache.addEventListener("progress", onProgress);
-                appCache.addEventListener("cached", onCached);
-                appCache.addEventListener("noupdate", onNoUpdate);
-                appCache.addEventListener("error", onError);
-
-                try {
-                    appCache.update();
-
-                    if (appCache.status === appCache.UPDATEREADY) {
-                        finishCache(true);
-                    } else if (appCache.status === appCache.IDLE) {
-                        finishCache(true);
-                    }
-                } catch (error) {
-                    finishCache(false);
-                }
-            }
-
-            function loadExploit() {
-                eyebrow.textContent = "RayZenX em execução";
-                title.textContent = "Iniciando desbloqueio";
-                description.textContent =
-                    "Mantenha o console ligado e aguarde. Não feche o navegador durante o processo.";
-                button.classList.add("hidden");
-                progressArea.style.display = "block";
-                setProgress(5, "Preparando ambiente...");
-                status.textContent = "Carregando os componentes do firmware " + firmware + "...";
-
-                const script = document.createElement("script");
-                if (config.module) script.type = "module";
-
-                script.src = config.script;
-                script.async = true;
-
-                script.onload = () => {
-                    setProgress(100, "Arquivo carregado");
-                    status.textContent =
-                        "O arquivo foi carregado. A conclusão do desbloqueio depende da execução do host.";
-
-                    if (config.runDoJb && typeof window.doJb === "function") {
-                        status.textContent = "Executando o processo de desbloqueio...";
-                        try {
-                            window.doJb();
-                        } catch (error) {
-                            status.textContent =
-                                "O processo apresentou um erro. Consulte o comportamento do host para verificar a causa.";
-                            return;
-                        }
-                    }
-
-                    /*
-                     * O carregamento do arquivo não confirma, por si só,
-                     * que o GoldHEN foi iniciado. A mensagem de sucesso
-                     * precisa ser acionada pelo callback real do exploit.
-                     */
-                };
-
-                script.onerror = () => {
-                    title.textContent = "Falha ao carregar o host";
-                    description.textContent =
-                        "Não foi possível carregar o arquivo correspondente ao firmware.";
-                    status.textContent =
-                        "Verifique se o arquivo existe no caminho: " + config.script;
-                    setProgress(0, "Falha no carregamento");
-                };
-
-                document.body.appendChild(script);
-            }
-
-            function start() {
-                if (started || !config) return;
-                started = true;
-                button.disabled = true;
-                progressArea.style.display = "block";
-
-                /*
-                 * Se o cache ainda não foi criado, abre a página específica
-                 * de cache. Caso contrário, inicia o arquivo do firmware.
-                 */
-                const appCache = window.applicationCache;
-
-                if (appCache && appCache.status === appCache.UNCACHED) {
+                        "Preparando cache. Siga as instruções da próxima tela.";
                     window.location.href = config.cache;
                     return;
                 }
-
-                loadExploit();
+            } catch (error) {
+                // Continua tentando carregar o host.
             }
 
-            button.addEventListener("click", start);
+            loadExploit();
+        }
 
-            document.addEventListener("keydown", event => {
-                if (
-                    !started &&
-                    config &&
-                    (event.key === "Enter" || event.key === " ")
-                ) {
-                    event.preventDefault();
-                    start();
+        function loadExploit() {
+            messages.textContent =
+                "O desbloqueio está sendo iniciado. Aguarde...";
+
+            updateProgress(15, "Carregando os componentes do host...");
+
+            const script = document.createElement("script");
+
+            script.src = config.script;
+            script.async = true;
+
+            if (config.module) {
+                script.type = "module";
+            }
+
+            script.onload = () => {
+                updateProgress(
+                    100,
+                    "Arquivo carregado. Aguardando o resultado do processo..."
+                );
+
+                messages.textContent =
+                    "Componentes carregados. Aguarde a execução do desbloqueio.";
+
+                /*
+                 * Carregar o JavaScript não comprova que o
+                 * desbloqueio foi concluído.
+                 */
+                if (config.runDoJb) {
+                    if (typeof window.doJb === "function") {
+                        try {
+                            window.doJb();
+
+                            status.textContent =
+                                "Processo iniciado. Aguardando confirmação do host.";
+                        } catch (error) {
+                            showError(
+                                "Ocorreu um erro durante a execução. Verifique o script do firmware."
+                            );
+                        }
+                    } else {
+                        status.textContent =
+                            "Arquivo carregado, mas a função de inicialização não foi encontrada.";
+                    }
                 }
-            });
-        })();
+            };
+
+            script.onerror = () => {
+                updateProgress(0, "Falha ao carregar o arquivo.");
+
+                showError(
+                    "Não foi possível carregar " + config.script +
+                    ". Confira se o arquivo existe no projeto."
+                );
+            };
+
+            document.body.appendChild(script);
+        }
+
+        /*
+         * Ponto de integração opcional:
+         * o exploit precisa chamar esta função após confirmar
+         * realmente o sucesso para exibir a mensagem final.
+         */
+        window.rayzenxUnlockComplete = function() {
+            messages.textContent = "DESBLOQUEIO CONCLUÍDO!";
+            status.textContent =
+                "Processo concluído. Aproveite seu console!";
+            updateProgress(100, "Desbloqueio concluído");
+        };
+
+        button.addEventListener("click", startHost);
+
+        document.addEventListener("keydown", event => {
+            if (
+                !started &&
+                config &&
+                (event.key === "Enter" || event.key === " ")
+            ) {
+                event.preventDefault();
+                startHost();
+            }
+        });
+    })();
     </script>
 </body>
 </html>
