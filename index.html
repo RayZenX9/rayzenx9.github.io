@@ -1,613 +1,561 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080808">
-<title>RayZenX — PS4 Host</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050505">
 
-<style>
-:root {
-    --bg: #080808;
-    --panel: #101010;
-    --red: #ff263f;
-    --white: #f5f5f5;
-    --muted: #888;
-    --line: rgba(255,255,255,.1);
-}
+    <title>RayZenX — PS4 Multi Firmware</title>
 
-* { box-sizing: border-box; }
+    <style>
+        :root {
+            --bg: #050505;
+            --red: #ed1717;
+            --red-light: #ff3838;
+            --text: #f5f5f5;
+            --muted: #929292;
+            --border: rgba(237, 23, 23, .35);
+        }
 
-html, body {
-    margin: 0;
-    min-height: 100%;
-    background: var(--bg);
-    color: var(--white);
-    font-family: Arial, Helvetica, sans-serif;
-}
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-body {
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    overflow-x: hidden;
-    background:
-        radial-gradient(ellipse at 50% 35%,
-            rgba(255,38,63,.10), transparent 55%),
-        linear-gradient(145deg, #101010, #050505 70%);
-}
+        html {
+            min-height: 100%;
+            background: var(--bg) url('img.jpg') center / cover fixed no-repeat;
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-.top-glow {
-    position: fixed;
-    z-index: 5;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(
-        90deg, transparent, var(--red), #ff8793, var(--red), transparent
-    );
-    box-shadow: 0 0 20px rgba(255,38,63,.5);
-}
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 22px 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(
+                rgba(5, 5, 5, .80),
+                rgba(5, 5, 5, .95)
+            );
+        }
 
-header, footer {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-}
+        .container {
+            width: 100%;
+            max-width: 760px;
+            margin: auto;
+        }
 
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 8px 0 20px;
-    border-bottom: 1px solid var(--line);
-}
+        .brand {
+            margin-bottom: 8px;
+            font-size: clamp(28px, 6vw, 43px);
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 0 0 24px rgba(237, 23, 23, .3);
+        }
 
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+        .brand span {
+            color: var(--red);
+        }
 
-.logo {
-    width: 43px;
-    height: 43px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255,38,63,.65);
-    border-radius: 10px;
-    color: var(--red);
-    font-size: 26px;
-    font-weight: 900;
-    background: #16090b;
-    box-shadow: 0 0 25px rgba(255,38,63,.08);
-}
+        .subtitle {
+            color: var(--muted);
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
 
-.brand-name {
-    font-size: 20px;
-    font-weight: 900;
-    letter-spacing: 2px;
-}
+        .line {
+            height: 1px;
+            margin: 25px 0;
+            border: 0;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--red),
+                transparent
+            );
+        }
 
-.brand-name span { color: var(--red); }
+        .panel {
+            padding: 30px 22px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: rgba(8, 8, 8, .78);
+            box-shadow: 0 0 35px rgba(237, 23, 23, .07);
+        }
 
-.brand-sub {
-    margin-top: 5px;
-    color: var(--muted);
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
+        .eyebrow {
+            color: var(--red-light);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
 
-.fw-badge {
-    padding: 9px 11px;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    color: #aaa;
-    font-size: 10px;
-    letter-spacing: 1px;
-    white-space: nowrap;
-}
+        h1 {
+            margin: 18px 0 12px;
+            font-size: clamp(24px, 5vw, 36px);
+            line-height: 1.25;
+            font-weight: 900;
+        }
 
-main {
-    width: 100%;
-    max-width: 650px;
-    margin: auto;
-    padding: 55px 0;
-    align-self: center;
-}
+        .description {
+            max-width: 530px;
+            margin: 0 auto;
+            color: #b8b8b8;
+            font-size: 15px;
+            line-height: 1.8;
+        }
 
-.eyebrow {
-    color: var(--red);
-    text-align: center;
-    font-size: 10px;
-    font-weight: bold;
-    letter-spacing: 4px;
-}
+        .firmware {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 10px 16px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            background: rgba(237, 23, 23, .07);
+            color: var(--red-light);
+            font-size: 13px;
+            font-weight: 700;
+        }
 
-h1 {
-    margin: 22px 0 14px;
-    text-align: center;
-    font-size: clamp(38px, 8vw, 64px);
-    font-weight: 900;
-    letter-spacing: -2px;
-    line-height: 1.03;
-}
+        button {
+            width: 100%;
+            max-width: 340px;
+            min-height: 58px;
+            margin-top: 28px;
+            padding: 15px 20px;
+            border: 1px solid var(--red-light);
+            border-radius: 8px;
+            background: linear-gradient(135deg, #f12626, #a90000);
+            color: white;
+            font-size: 15px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            box-shadow: 0 0 24px rgba(237, 23, 23, .18);
+        }
 
-h1 span { color: var(--red); }
+        button:active {
+            background: #a90000;
+        }
 
-.intro {
-    max-width: 430px;
-    margin: 0 auto;
-    color: #999;
-    text-align: center;
-    font-size: 13px;
-    line-height: 1.8;
-}
+        button:disabled {
+            opacity: .6;
+            cursor: default;
+        }
 
-.panel {
-    margin-top: 35px;
-    padding: 25px;
-    border: 1px solid rgba(255,38,63,.23);
-    border-radius: 13px;
-    background: linear-gradient(140deg, #151515, #0c0c0c);
-    box-shadow: 0 25px 70px rgba(0,0,0,.4);
-    position: relative;
-    overflow: hidden;
-}
+        .progress-area {
+            display: none;
+            margin-top: 28px;
+        }
 
-.panel:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(var(--red), transparent);
-}
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+            color: var(--muted);
+            font-size: 12px;
+        }
 
-.panel-label {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    color: #999;
-    font-size: 10px;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
+        #percentage {
+            color: var(--red-light);
+            font-weight: 800;
+        }
 
-.dot {
-    width: 7px;
-    height: 7px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: var(--red);
-    box-shadow: 0 0 10px var(--red);
-}
+        .progress-track {
+            width: 100%;
+            height: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: #191919;
+        }
 
-#status {
-    margin: 20px 0 8px;
-    font-size: 22px;
-    line-height: 1.4;
-    font-weight: 800;
-    overflow-wrap: anywhere;
-}
+        #progressFill {
+            width: 0%;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #a90000, #ff3838);
+            box-shadow: 0 0 14px rgba(237, 23, 23, .35);
+            transition: width .3s ease;
+        }
 
-#detail {
-    min-height: 34px;
-    color: #929292;
-    font-size: 12px;
-    line-height: 1.7;
-    overflow-wrap: anywhere;
-}
+        #status {
+            min-height: 44px;
+            margin-top: 18px;
+            color: #c4c4c4;
+            font-size: 14px;
+            line-height: 1.7;
+        }
 
-.fw-info {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    margin-top: 22px;
-    color: #777;
-    font-size: 10px;
-    letter-spacing: 1px;
-}
+        .footer {
+            margin-top: 22px;
+            color: #707070;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
 
-.fw-info strong { color: #eee; }
+        .hidden {
+            display: none !important;
+        }
 
-.progress-track {
-    width: 100%;
-    height: 5px;
-    margin-top: 12px;
-    border-radius: 5px;
-    overflow: hidden;
-    background: #292929;
-}
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 10px;
+            }
 
-.progress {
-    width: 0%;
-    height: 100%;
-    border-radius: inherit;
-    background: linear-gradient(90deg, #a90018, var(--red), #ff8491);
-    box-shadow: 0 0 14px rgba(255,38,63,.55);
-    transition: width .35s ease;
-}
+            .panel {
+                padding: 25px 16px;
+            }
 
-.start-wrap {
-    margin-top: 25px;
-    text-align: center;
-}
+            .subtitle {
+                font-size: 10px;
+                letter-spacing: 2px;
+            }
 
-.start-button {
-    width: 100%;
-    min-height: 62px;
-    padding: 14px 18px;
-    border: 1px solid #ff5265;
-    border-radius: 8px;
-    background: linear-gradient(110deg, #d90d29, #ff263f);
-    color: white;
-    font-size: 14px;
-    font-weight: 900;
-    letter-spacing: 1.5px;
-    box-shadow: 0 8px 28px rgba(255,38,63,.18);
-    cursor: pointer;
-}
-
-.start-button:active {
-    background: #b90c22;
-}
-
-.start-button:disabled {
-    opacity: .55;
-    cursor: default;
-}
-
-.x-icon {
-    display: inline-flex;
-    width: 26px;
-    height: 26px;
-    margin-right: 8px;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255,255,255,.7);
-    border-radius: 50%;
-    font-size: 15px;
-}
-
-.hint {
-    margin-top: 12px;
-    color: #777;
-    font-size: 10px;
-    letter-spacing: 1px;
-}
-
-.features {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 9px;
-    margin-top: 20px;
-}
-
-.feature {
-    padding: 9px 11px;
-    border: 1px solid var(--line);
-    border-radius: 5px;
-    color: #aaa;
-    font-size: 9px;
-    letter-spacing: .7px;
-}
-
-.feature span { color: var(--red); }
-
-footer {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 17px 0 3px;
-    border-top: 1px solid var(--line);
-    color: #666;
-    font-size: 9px;
-    letter-spacing: 1px;
-}
-
-footer strong { color: #aaa; }
-
-@media (max-width: 480px) {
-    body { padding: 15px; }
-    .logo { width: 36px; height: 36px; font-size: 22px; }
-    .brand-name { font-size: 17px; }
-    .brand-sub { font-size: 8px; letter-spacing: 1px; }
-    .fw-badge { font-size: 8px; padding: 8px 6px; }
-    main { padding: 40px 0; }
-    h1 { font-size: 42px; }
-    .panel { padding: 20px 17px; }
-    #status { font-size: 20px; }
-    .start-button { font-size: 12px; }
-}
-
-@media (max-height: 520px) {
-    main { padding: 20px 0; }
-    h1 { margin-top: 12px; font-size: 36px; }
-    .panel { margin-top: 18px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *, *:before, *:after {
-        transition: none !important;
-    }
-}
-</style>
+            .description {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-<div class="top-glow"></div>
+    <main class="container">
+        <header>
+            <div class="brand">RAYZEN<span>X</span></div>
+            <div class="subtitle">Ambiente Multi Firmware</div>
+        </header>
 
-<header>
-    <div class="brand">
-        <div class="logo">R</div>
-        <div>
-            <div class="brand-name">RAYZEN<span>X</span></div>
-            <div class="brand-sub">PlayStation 4 Host</div>
-        </div>
-    </div>
-    <div class="fw-badge" id="header-fw">DETECTANDO FW</div>
-</header>
+        <hr class="line">
 
-<main>
-    <div class="eyebrow">SISTEMA DE INICIALIZAÇÃO</div>
+        <section class="panel">
+            <div class="eyebrow" id="eyebrow">Sistema de inicialização</div>
 
-    <h1>SEU CONSOLE.<br><span>SEU CONTROLE.</span></h1>
+            <h1 id="title">Seu console desbloqueado.</h1>
 
-    <p class="intro">
-        Ambiente RayZenX Multi Firmware.
-        Identifique seu sistema e inicie a preparação do host.
-    </p>
+            <p class="description" id="description">
+                Ambiente RayZenX Multi Firmware.<br>
+                Seu sistema será identificado e o processo de desbloqueio
+                será iniciado automaticamente após a confirmação.
+            </p>
 
-    <section class="panel">
-        <div class="panel-label">
-            <span class="dot"></span>
-            STATUS DO SISTEMA
-        </div>
-
-        <div id="status">Verificando sistema...</div>
-        <div id="detail">Detectando o firmware do console.</div>
-
-        <div class="fw-info">
-            <span>FIRMWARE</span>
-            <strong id="firmware">Verificando...</strong>
-            <span id="percent">0%</span>
-        </div>
-
-        <div
-            class="progress-track"
-            role="progressbar"
-            aria-label="Carregamento dos arquivos"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            aria-valuenow="0"
-            id="progress-track"
-        >
-            <div class="progress" id="progress"></div>
-        </div>
-
-        <div class="start-wrap">
-            <button class="start-button" id="start" type="button">
-                <span class="x-icon">✕</span>
-                APERTE X PARA COMEÇAR
-            </button>
-            <div class="hint" id="hint">
-                PRESSIONE X NO CONTROLE OU SELECIONE O BOTÃO
+            <div class="firmware" id="firmware">
+                Firmware: verificando sistema...
             </div>
-        </div>
-    </section>
 
-    <div class="features">
-        <div class="feature"><span>◆</span> MULTI FIRMWARE</div>
-        <div class="feature"><span>◆</span> INTERFACE PREMIUM</div>
-        <div class="feature"><span>◆</span> RAYZENX HOST</div>
-    </div>
-</main>
+            <button id="startButton" type="button">
+                ✕ &nbsp; APERTE X PARA COMEÇAR
+            </button>
 
-<footer>
-    <span>RAYZEN<strong>X</strong> HOST</span>
-    <span>PS4 • MULTI FIRMWARE</span>
-</footer>
+            <div class="progress-area" id="progressArea">
+                <div class="progress-info">
+                    <span id="progressLabel">Preparando ambiente...</span>
+                    <span id="percentage">0%</span>
+                </div>
 
-<script>
-(function () {
-    "use strict";
+                <div class="progress-track">
+                    <div id="progressFill"></div>
+                </div>
+            </div>
 
-    var started = false;
-    var ua = navigator.userAgent || "";
-    var match = ua.match(/PlayStation 4[ /]([\d.]+)/i);
-    var isPS4 = !!match;
-    var fwVersion = isPS4 ? match[1] : "Não detectado";
-    var fwNum = isPS4 ? parseFloat(fwVersion) : NaN;
+            <div id="status" aria-live="polite">
+                Aguardando confirmação para iniciar.
+            </div>
+        </section>
 
-    var statusEl = document.getElementById("status");
-    var detailEl = document.getElementById("detail");
-    var firmwareEl = document.getElementById("firmware");
-    var headerFw = document.getElementById("header-fw");
-    var progressEl = document.getElementById("progress");
-    var percentEl = document.getElementById("percent");
-    var trackEl = document.getElementById("progress-track");
-    var button = document.getElementById("start");
-    var hint = document.getElementById("hint");
+        <footer class="footer">
+            RAYZENX © 2026 — PS4 MULTI FIRMWARE
+        </footer>
+    </main>
 
-    function setProgress(value) {
-        value = Math.max(0, Math.min(100, value));
-        progressEl.style.width = value + "%";
-        percentEl.textContent = value + "%";
-        trackEl.setAttribute("aria-valuenow", value);
-    }
+    <script>
+        (() => {
+            "use strict";
 
-    function setStatus(title, detail) {
-        statusEl.textContent = title;
-        detailEl.textContent = detail;
-    }
+            const $ = id => document.getElementById(id);
 
-    function setStep(value, title, detail) {
-        setProgress(value);
-        setStatus(title, detail);
-    }
+            const title = $("title");
+            const description = $("description");
+            const eyebrow = $("eyebrow");
+            const firmwareLabel = $("firmware");
+            const button = $("startButton");
+            const status = $("status");
+            const progressArea = $("progressArea");
+            const progressLabel = $("progressLabel");
+            const percentage = $("percentage");
+            const progressFill = $("progressFill");
 
-    function fail(title, detail) {
-        setStatus(title, detail);
-        button.disabled = false;
-        button.innerHTML = "↻ TENTAR NOVAMENTE";
-        hint.textContent = "VERIFIQUE OS ARQUIVOS E TENTE NOVAMENTE";
-        started = false;
-    }
+            let started = false;
+            let progressTimer = null;
 
-    function isCacheEmpty() {
-        try {
-            return !!(
-                window.applicationCache &&
-                window.applicationCache.status === 0
-            );
-        } catch (e) {
-            return false;
-        }
-    }
+            const ua = navigator.userAgent;
+            const match = ua.match(/PlayStation 4[ /]([\d.]+)/i);
+            const firmware = match ? match[1] : null;
+            const fw = firmware ? parseFloat(firmware) : NaN;
 
-    function loadScript(src, isModule, onLoad) {
-        var script = document.createElement("script");
-        script.src = src;
-        script.onerror = function () {
-            fail(
-                "Falha ao carregar arquivo",
-                "Não foi possível carregar: " + src
-            );
-        };
+            let config = null;
 
-        if (isModule) {
-            script.type = "module";
-        }
+            if (firmware) {
+                if (fw === 5.05 || fw === 5.07) {
+                    config = {
+                        name: firmware,
+                        cache: "cache505.html",
+                        script: "505/exploit.js",
+                        module: false
+                    };
+                } else if (fw >= 7.00 && fw <= 8.52) {
+                    config = {
+                        name: firmware,
+                        cache: "cache700.html",
+                        script: "700/alert.js",
+                        module: true
+                    };
+                } else if (fw >= 9.00 && fw <= 9.60) {
+                    config = {
+                        name: firmware,
+                        cache: "cache900.html",
+                        script: "900/alert.js",
+                        module: true
+                    };
+                } else if (fw >= 10.00 && fw <= 11.02) {
+                    config = {
+                        name: firmware,
+                        cache: "cachecss.html",
+                        script: "css/main.js",
+                        module: false,
+                        runDoJb: true
+                    };
+                } else if (fw === 11.50 || fw === 11.52) {
+                    config = {
+                        name: firmware,
+                        cache: "cacheslopkit.html",
+                        script: "slopkit/chain_lapse.js",
+                        module: true
+                    };
+                } else if (fw >= 12.00 && fw <= 14.02) {
+                    config = {
+                        name: firmware,
+                        cache: "cacheslopkit.html",
+                        script: "slopkit/jb.js",
+                        module: true
+                    };
+                }
+            }
 
-        if (onLoad) {
-            script.onload = onLoad;
-        }
+            firmwareLabel.textContent = firmware
+                ? "Firmware detectado: " + firmware
+                : "Firmware: não identificado";
 
-        document.head.appendChild(script);
-    }
+            if (!match) {
+                title.textContent = "Acesse pelo navegador do PS4";
+                description.textContent =
+                    "O RayZenX precisa ser aberto no navegador do console para identificar o firmware corretamente.";
+                status.textContent = "Nenhum console PS4 foi identificado.";
+                button.disabled = true;
+                button.textContent = "NAVEGADOR NÃO COMPATÍVEL";
+            } else if (!config) {
+                title.textContent = "Firmware não suportado";
+                description.textContent =
+                    "Esta versão não está na lista de firmwares configurados neste host.";
+                status.textContent = "Firmware detectado: " + firmware;
+                button.disabled = true;
+                button.textContent = "FIRMWARE NÃO SUPORTADO";
+            }
 
-    function beginHost() {
-        if (started) return;
-        started = true;
-        button.disabled = true;
-        button.textContent = "INICIALIZANDO...";
-        hint.textContent = "NÃO FECHE O NAVEGADOR";
+            function setProgress(value, label) {
+                const amount = Math.max(0, Math.min(100, value));
+                progressFill.style.width = amount + "%";
+                percentage.textContent = Math.round(amount) + "%";
+                if (label) progressLabel.textContent = label;
+            }
 
-        if (!isPS4) {
-            fail(
-                "Console não identificado",
-                "Abra este host no navegador do PlayStation 4."
-            );
-            return;
-        }
+            function showCacheInstructions() {
+                eyebrow.textContent = "Instalação do cache";
+                title.textContent = "Preparando o ambiente";
+                description.textContent =
+                    "O cache está sendo preparado para facilitar os próximos acessos ao RayZenX.";
+                firmwareLabel.textContent = "Firmware detectado: " + firmware;
+                button.classList.add("hidden");
+                progressArea.style.display = "block";
+                status.textContent = "Aguarde enquanto o navegador processa o cache.";
+            }
 
-        setStep(10, "Firmware detectado", "Versão identificada: " + fwVersion);
+            function startCacheInstallation() {
+                showCacheInstructions();
 
-        var cachePage = "";
-        var scriptPath = "";
-        var isModule = false;
+                const appCache = window.applicationCache;
 
-        if (fwNum === 5.05 || fwNum === 5.07) {
-            cachePage = "cache505.html";
-            scriptPath = "505/exploit.js";
-        } else if (fwNum >= 7.00 && fwNum <= 8.52) {
-            cachePage = "cache700.html";
-            scriptPath = "700/alert.js";
-            isModule = true;
-        } else if (fwNum >= 9.00 && fwNum <= 9.60) {
-            cachePage = "cache900.html";
-            scriptPath = "900/alert.js";
-            isModule = true;
-        } else if (fwNum >= 10.00 && fwNum <= 11.02) {
-            cachePage = "cachecss.html";
-            scriptPath = "css/main.js";
-        } else if (fwNum === 11.50 || fwNum === 11.52) {
-            cachePage = "cacheslopkit.html";
-            scriptPath = "slopkit/chain_lapse.js";
-            isModule = true;
-        } else if (fwNum >= 12.00 && fwNum <= 14.02) {
-            cachePage = "cacheslopkit.html";
-            scriptPath = "slopkit/jb.js";
-            isModule = true;
-        } else {
-            fail(
-                "Firmware não compatível",
-                "Versão detectada: " + fwVersion
-            );
-            return;
-        }
+                if (!appCache) {
+                    title.textContent = "Cache não disponível";
+                    description.textContent =
+                        "Este navegador não disponibilizou o recurso de cache de aplicação necessário para esta etapa.";
+                    status.textContent =
+                        "Verifique a configuração do host e do navegador antes de continuar.";
+                    return;
+                }
 
-        setStep(25, "Preparando ambiente", "Selecionando os arquivos do firmware.");
+                let finished = false;
 
-        if (isCacheEmpty()) {
-            setStep(40, "Preparando cache offline", "Abrindo a página de cache correspondente.");
-            window.location.replace(cachePage);
-            return;
-        }
+                function finishCache(success) {
+                    if (finished) return;
+                    finished = true;
+                    appCache.removeEventListener("progress", onProgress);
+                    appCache.removeEventListener("cached", onCached);
+                    appCache.removeEventListener("noupdate", onNoUpdate);
+                    appCache.removeEventListener("error", onError);
 
-        setStep(55, "Carregando arquivos", "Solicitando os arquivos do host.");
-
-        loadScript(scriptPath, isModule, function () {
-            setProgress(100);
-            setStatus("Arquivos carregados", "O script foi carregado. A conclusão do processo depende da resposta do host.");
-            button.textContent = "PROCESSO INICIADO";
-            hint.textContent = "AGUARDE A RESPOSTA DO HOST";
-
-            if (fwNum >= 10.00 && fwNum <= 11.02) {
-                setStatus("Preparando execução", "Aguardando a inicialização do módulo.");
-                window.setTimeout(function () {
-                    if (typeof window.doJb === "function") {
-                        try {
-                            window.doJb();
-                        } catch (e) {
-                            fail("Erro na execução", "O módulo retornou um erro.");
-                        }
+                    if (success) {
+                        setProgress(100, "Cache instalado");
+                        title.textContent = "Cache instalado com sucesso!";
+                        description.textContent =
+                            "Agora feche o navegador do PS4 completamente e abra-o novamente para continuar.";
+                        status.textContent =
+                            "Cache preparado. Feche e reabra o navegador do console.";
                     } else {
-                        fail(
-                            "Módulo não inicializado",
-                            "O arquivo foi carregado, mas a função doJb não foi encontrada."
+                        title.textContent = "Não foi possível instalar o cache";
+                        description.textContent =
+                            "Confira sua conexão e a configuração do host. Se necessário, limpe os dados do navegador e tente novamente.";
+                        status.textContent =
+                            "A instalação do cache não foi confirmada.";
+                    }
+                }
+
+                function onProgress(event) {
+                    if (event.lengthComputable && event.total > 0) {
+                        setProgress(
+                            event.loaded / event.total * 100,
+                            "Instalando cache..."
+                        );
+                    } else {
+                        setProgress(
+                            Math.min(90, parseFloat(percentage.textContent) + 5),
+                            "Instalando cache..."
                         );
                     }
-                }, 500);
+                }
+
+                function onCached() {
+                    finishCache(true);
+                }
+
+                function onNoUpdate() {
+                    finishCache(true);
+                }
+
+                function onError() {
+                    finishCache(false);
+                }
+
+                appCache.addEventListener("progress", onProgress);
+                appCache.addEventListener("cached", onCached);
+                appCache.addEventListener("noupdate", onNoUpdate);
+                appCache.addEventListener("error", onError);
+
+                try {
+                    appCache.update();
+
+                    if (appCache.status === appCache.UPDATEREADY) {
+                        finishCache(true);
+                    } else if (appCache.status === appCache.IDLE) {
+                        finishCache(true);
+                    }
+                } catch (error) {
+                    finishCache(false);
+                }
             }
-        });
-    }
 
-    firmwareEl.textContent = fwVersion;
-    headerFw.textContent = isPS4 ? "PS4 • " + fwVersion : "PS4 HOST";
+            function loadExploit() {
+                eyebrow.textContent = "RayZenX em execução";
+                title.textContent = "Iniciando desbloqueio";
+                description.textContent =
+                    "Mantenha o console ligado e aguarde. Não feche o navegador durante o processo.";
+                button.classList.add("hidden");
+                progressArea.style.display = "block";
+                setProgress(5, "Preparando ambiente...");
+                status.textContent = "Carregando os componentes do firmware " + firmware + "...";
 
-    if (isPS4) {
-        setStatus("Sistema identificado", "Firmware " + fwVersion + " detectado. Pronto para iniciar.");
-    } else {
-        setStatus("Aguardando início", "Abra no navegador do PS4 para detectar o firmware.");
-        detailEl.textContent = "Este host foi preparado para PlayStation 4.";
-    }
+                const script = document.createElement("script");
+                if (config.module) script.type = "module";
 
-    button.addEventListener("click", beginHost);
+                script.src = config.script;
+                script.async = true;
 
-    document.addEventListener("keydown", function (event) {
-        if (
-            event.key === "Enter" ||
-            event.key === " " ||
-            event.keyCode === 13 ||
-            event.keyCode === 32
-        ) {
-            if (!started) {
-                event.preventDefault();
-                beginHost();
+                script.onload = () => {
+                    setProgress(100, "Arquivo carregado");
+                    status.textContent =
+                        "O arquivo foi carregado. A conclusão do desbloqueio depende da execução do host.";
+
+                    if (config.runDoJb && typeof window.doJb === "function") {
+                        status.textContent = "Executando o processo de desbloqueio...";
+                        try {
+                            window.doJb();
+                        } catch (error) {
+                            status.textContent =
+                                "O processo apresentou um erro. Consulte o comportamento do host para verificar a causa.";
+                            return;
+                        }
+                    }
+
+                    /*
+                     * O carregamento do arquivo não confirma, por si só,
+                     * que o GoldHEN foi iniciado. A mensagem de sucesso
+                     * precisa ser acionada pelo callback real do exploit.
+                     */
+                };
+
+                script.onerror = () => {
+                    title.textContent = "Falha ao carregar o host";
+                    description.textContent =
+                        "Não foi possível carregar o arquivo correspondente ao firmware.";
+                    status.textContent =
+                        "Verifique se o arquivo existe no caminho: " + config.script;
+                    setProgress(0, "Falha no carregamento");
+                };
+
+                document.body.appendChild(script);
             }
-        }
-    });
-})();
-</script>
+
+            function start() {
+                if (started || !config) return;
+                started = true;
+                button.disabled = true;
+                progressArea.style.display = "block";
+
+                /*
+                 * Se o cache ainda não foi criado, abre a página específica
+                 * de cache. Caso contrário, inicia o arquivo do firmware.
+                 */
+                const appCache = window.applicationCache;
+
+                if (appCache && appCache.status === appCache.UNCACHED) {
+                    window.location.href = config.cache;
+                    return;
+                }
+
+                loadExploit();
+            }
+
+            button.addEventListener("click", start);
+
+            document.addEventListener("keydown", event => {
+                if (
+                    !started &&
+                    config &&
+                    (event.key === "Enter" || event.key === " ")
+                ) {
+                    event.preventDefault();
+                    start();
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
