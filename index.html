@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080808">
-<title>RayZenX — Cache Offline</title>
+<title>RayZenX — PS4 Host</title>
 
 <style>
 :root {
@@ -16,7 +16,9 @@
     --muted: #888;
     --line: rgba(255,255,255,.1);
 }
+
 * { box-sizing: border-box; }
+
 html, body {
     margin: 0;
     min-height: 100%;
@@ -24,6 +26,7 @@ html, body {
     color: var(--white);
     font-family: Arial, Helvetica, sans-serif;
 }
+
 body {
     min-height: 100vh;
     min-height: 100dvh;
@@ -32,9 +35,11 @@ body {
     padding: 20px;
     overflow-x: hidden;
     background:
-        radial-gradient(ellipse at 50% 35%, rgba(255,38,63,.10), transparent 55%),
+        radial-gradient(ellipse at 50% 35%,
+            rgba(255,38,63,.10), transparent 55%),
         linear-gradient(145deg, #101010, #050505 70%);
 }
+
 .top-glow {
     position: fixed;
     z-index: 5;
@@ -42,14 +47,18 @@ body {
     left: 0;
     width: 100%;
     height: 3px;
-    background: linear-gradient(90deg, transparent, var(--red), #ff8793, var(--red), transparent);
+    background: linear-gradient(
+        90deg, transparent, var(--red), #ff8793, var(--red), transparent
+    );
     box-shadow: 0 0 20px rgba(255,38,63,.5);
 }
+
 header, footer {
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
 }
+
 header {
     display: flex;
     align-items: center;
@@ -58,7 +67,13 @@ header {
     padding: 8px 0 20px;
     border-bottom: 1px solid var(--line);
 }
-.brand { display: flex; align-items: center; gap: 12px; }
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .logo {
     width: 43px;
     height: 43px;
@@ -73,8 +88,15 @@ header {
     background: #16090b;
     box-shadow: 0 0 25px rgba(255,38,63,.08);
 }
-.brand-name { font-size: 20px; font-weight: 900; letter-spacing: 2px; }
+
+.brand-name {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
 .brand-name span { color: var(--red); }
+
 .brand-sub {
     margin-top: 5px;
     color: var(--muted);
@@ -82,6 +104,7 @@ header {
     letter-spacing: 2px;
     text-transform: uppercase;
 }
+
 .fw-badge {
     padding: 9px 11px;
     border: 1px solid var(--line);
@@ -91,6 +114,7 @@ header {
     letter-spacing: 1px;
     white-space: nowrap;
 }
+
 main {
     width: 100%;
     max-width: 650px;
@@ -98,6 +122,7 @@ main {
     padding: 55px 0;
     align-self: center;
 }
+
 .eyebrow {
     color: var(--red);
     text-align: center;
@@ -105,6 +130,7 @@ main {
     font-weight: bold;
     letter-spacing: 4px;
 }
+
 h1 {
     margin: 22px 0 14px;
     text-align: center;
@@ -113,7 +139,9 @@ h1 {
     letter-spacing: -2px;
     line-height: 1.03;
 }
+
 h1 span { color: var(--red); }
+
 .intro {
     max-width: 430px;
     margin: 0 auto;
@@ -122,6 +150,7 @@ h1 span { color: var(--red); }
     font-size: 13px;
     line-height: 1.8;
 }
+
 .panel {
     margin-top: 35px;
     padding: 25px;
@@ -132,6 +161,7 @@ h1 span { color: var(--red); }
     position: relative;
     overflow: hidden;
 }
+
 .panel:before {
     content: "";
     position: absolute;
@@ -141,6 +171,7 @@ h1 span { color: var(--red); }
     height: 100%;
     background: linear-gradient(var(--red), transparent);
 }
+
 .panel-label {
     display: flex;
     align-items: center;
@@ -150,6 +181,7 @@ h1 span { color: var(--red); }
     font-weight: bold;
     letter-spacing: 2px;
 }
+
 .dot {
     width: 7px;
     height: 7px;
@@ -158,6 +190,7 @@ h1 span { color: var(--red); }
     background: var(--red);
     box-shadow: 0 0 10px var(--red);
 }
+
 #status {
     margin: 20px 0 8px;
     font-size: 22px;
@@ -165,6 +198,7 @@ h1 span { color: var(--red); }
     font-weight: 800;
     overflow-wrap: anywhere;
 }
+
 #detail {
     min-height: 34px;
     color: #929292;
@@ -172,6 +206,7 @@ h1 span { color: var(--red); }
     line-height: 1.7;
     overflow-wrap: anywhere;
 }
+
 .fw-info {
     display: flex;
     justify-content: space-between;
@@ -181,7 +216,9 @@ h1 span { color: var(--red); }
     font-size: 10px;
     letter-spacing: 1px;
 }
+
 .fw-info strong { color: #eee; }
+
 .progress-track {
     width: 100%;
     height: 5px;
@@ -190,6 +227,7 @@ h1 span { color: var(--red); }
     overflow: hidden;
     background: #292929;
 }
+
 .progress {
     width: 0%;
     height: 100%;
@@ -198,7 +236,12 @@ h1 span { color: var(--red); }
     box-shadow: 0 0 14px rgba(255,38,63,.55);
     transition: width .2s ease;
 }
-.start-wrap { margin-top: 25px; text-align: center; }
+
+.start-wrap {
+    margin-top: 25px;
+    text-align: center;
+}
+
 .start-button {
     width: 100%;
     min-height: 62px;
@@ -213,8 +256,14 @@ h1 span { color: var(--red); }
     box-shadow: 0 8px 28px rgba(255,38,63,.18);
     cursor: pointer;
 }
+
 .start-button:active { background: #b90c22; }
-.start-button:disabled { opacity: .55; cursor: default; }
+
+.start-button:disabled {
+    opacity: .55;
+    cursor: default;
+}
+
 .x-icon {
     display: inline-flex;
     width: 26px;
@@ -226,12 +275,14 @@ h1 span { color: var(--red); }
     border-radius: 50%;
     font-size: 15px;
 }
+
 .hint {
     margin-top: 12px;
     color: #777;
     font-size: 10px;
     letter-spacing: 1px;
 }
+
 .features {
     display: flex;
     justify-content: center;
@@ -239,6 +290,7 @@ h1 span { color: var(--red); }
     gap: 9px;
     margin-top: 20px;
 }
+
 .feature {
     padding: 9px 11px;
     border: 1px solid var(--line);
@@ -247,7 +299,9 @@ h1 span { color: var(--red); }
     font-size: 9px;
     letter-spacing: .7px;
 }
+
 .feature span { color: var(--red); }
+
 footer {
     display: flex;
     justify-content: space-between;
@@ -258,6 +312,7 @@ footer {
     font-size: 9px;
     letter-spacing: 1px;
 }
+
 footer strong { color: #aaa; }
 
 @media (max-width: 480px) {
@@ -271,15 +326,18 @@ footer strong { color: #aaa; }
     .panel { padding: 20px 17px; }
     #status { font-size: 20px; }
     .start-button { font-size: 12px; }
-    .fw-info { gap: 6px; font-size: 9px; }
 }
+
 @media (max-height: 520px) {
     main { padding: 20px 0; }
     h1 { margin-top: 12px; font-size: 36px; }
     .panel { margin-top: 18px; }
 }
+
 @media (prefers-reduced-motion: reduce) {
-    *, *:before, *:after { transition: none !important; }
+    *, *:before, *:after {
+        transition: none !important;
+    }
 }
 </style>
 </head>
@@ -299,19 +357,19 @@ footer strong { color: #aaa; }
 </header>
 
 <main>
-    <div class="eyebrow">PREPARAÇÃO OFFLINE</div>
+    <div class="eyebrow">SISTEMA DE INICIALIZAÇÃO</div>
 
-    <h1>CACHE<br><span>OFFLINE.</span></h1>
+    <h1>SEU CONSOLE.<br><span>DESBLOQUEADO.</span></h1>
 
     <p class="intro">
-        RayZenX Cache Manager.
-        Prepare os recursos offline do seu sistema.
+        Ambiente RayZenX Multi Firmware.
+        Identifique seu sistema e inicie a preparação do host.
     </p>
 
     <section class="panel">
         <div class="panel-label">
             <span class="dot"></span>
-            STATUS DO CACHE
+            STATUS DO SISTEMA
         </div>
 
         <div id="status">Verificando sistema...</div>
@@ -323,20 +381,22 @@ footer strong { color: #aaa; }
             <span id="percent">0%</span>
         </div>
 
-        <div class="progress-track"
-             role="progressbar"
-             aria-label="Preparação do cache"
-             aria-valuemin="0"
-             aria-valuemax="100"
-             aria-valuenow="0"
-             id="progress-track">
+        <div
+            class="progress-track"
+            role="progressbar"
+            aria-label="Carregamento dos arquivos"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            id="progress-track"
+        >
             <div class="progress" id="progress"></div>
         </div>
 
         <div class="start-wrap">
             <button class="start-button" id="start" type="button">
                 <span class="x-icon">✕</span>
-                INSTALAR CACHE OFFLINE
+                APERTE X PARA COMEÇAR
             </button>
             <div class="hint" id="hint">
                 PRESSIONE X NO CONTROLE OU SELECIONE O BOTÃO
@@ -345,15 +405,15 @@ footer strong { color: #aaa; }
     </section>
 
     <div class="features">
-        <div class="feature"><span>◆</span> CACHE OFFLINE</div>
         <div class="feature"><span>◆</span> MULTI FIRMWARE</div>
+        <div class="feature"><span>◆</span> INTERFACE PREMIUM</div>
         <div class="feature"><span>◆</span> RAYZENX HOST</div>
     </div>
 </main>
 
 <footer>
     <span>RAYZEN<strong>X</strong> HOST</span>
-    <span>PS4 • CACHE OFFLINE</span>
+    <span>PS4 • MULTI FIRMWARE</span>
 </footer>
 
 <script>
@@ -377,27 +437,11 @@ footer strong { color: #aaa; }
     var button = document.getElementById("start");
     var hint = document.getElementById("hint");
 
-    var cacheFrame = null;
-
     function setProgress(value) {
         value = Math.max(0, Math.min(100, value));
         progressEl.style.width = value + "%";
-        percentEl.textContent = value + "%";
         trackEl.setAttribute("aria-valuenow", value);
-    }
-
-    function setStep(value, title, detail) {
-        setProgress(value);
-        statusEl.textContent = title;
-        detailEl.textContent = detail;
-    }
-
-    function fail(title, detail) {
-        setStatus(title, detail);
-        button.disabled = false;
-        button.innerHTML = '<span class="x-icon">↻</span>TENTAR NOVAMENTE';
-        hint.textContent = "VERIFIQUE OS ARQUIVOS E TENTE NOVAMENTE";
-        started = false;
+        percentEl.textContent = value + "%";
     }
 
     function setStatus(title, detail) {
@@ -405,44 +449,101 @@ footer strong { color: #aaa; }
         detailEl.textContent = detail;
     }
 
-    function getCachePage() {
-        if (fwNum === 5.05 || fwNum === 5.07) {
-            return "cache505.html";
-        }
-        if (fwNum >= 7.00 && fwNum <= 8.52) {
-            return "cache700.html";
-        }
-        if (fwNum >= 9.00 && fwNum <= 9.60) {
-            return "cache900.html";
-        }
-        if (fwNum >= 10.00 && fwNum <= 11.02) {
-            return "cachecss.html";
-        }
-        if (fwNum === 11.50 || fwNum === 11.52 ||
-            (fwNum >= 12.00 && fwNum <= 14.02)) {
-            return "cacheslopkit.html";
-        }
-        return null;
+    function setStep(value, title, detail) {
+        setProgress(value);
+        setStatus(title, detail);
     }
 
-    function beginCache() {
+    function fail(title, detail) {
+        setStatus(title, detail);
+        button.disabled = false;
+        button.textContent = "↻ TENTAR NOVAMENTE";
+        hint.textContent = "VERIFIQUE OS ARQUIVOS E TENTE NOVAMENTE";
+        started = false;
+    }
+
+    function isCacheEmpty() {
+        try {
+            return !!(
+                window.applicationCache &&
+                window.applicationCache.status === 0
+            );
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function loadScript(src, isModule, onLoad) {
+        var script = document.createElement("script");
+
+        if (isModule) {
+            script.type = "module";
+        }
+
+        script.onerror = function () {
+            fail(
+                "Falha ao carregar arquivo",
+                "Não foi possível carregar: " + src
+            );
+        };
+
+        script.onload = function () {
+            if (onLoad) onLoad();
+        };
+
+        script.src = src;
+        document.head.appendChild(script);
+    }
+
+    function beginHost() {
         if (started) return;
+
         started = true;
         button.disabled = true;
-        button.textContent = "PREPARANDO CACHE...";
+        button.textContent = "INICIALIZANDO...";
         hint.textContent = "NÃO FECHE O NAVEGADOR";
 
         if (!isPS4) {
             fail(
                 "Console não identificado",
-                "Abra esta página no navegador do PlayStation 4."
+                "Abra este host no navegador do PlayStation 4."
             );
             return;
         }
 
-        var cachePage = getCachePage();
+        setStep(
+            10,
+            "Firmware detectado",
+            "Versão identificada: " + fwVersion
+        );
 
-        if (!cachePage) {
+        var cachePage = "";
+        var scriptPath = "";
+        var isModule = false;
+
+        if (fwNum === 5.05 || fwNum === 5.07) {
+            cachePage = "cache505.html";
+            scriptPath = "505/exploit.js";
+        } else if (fwNum >= 7.00 && fwNum <= 8.52) {
+            cachePage = "cache700.html";
+            scriptPath = "700/alert.js";
+            isModule = true;
+        } else if (fwNum >= 9.00 && fwNum <= 9.60) {
+            cachePage = "cache900.html";
+            scriptPath = "900/alert.js";
+            isModule = true;
+        } else if (fwNum >= 10.00 && fwNum <= 11.02) {
+            cachePage = "cachecss.html";
+            scriptPath = "css/main.js";
+        } else if (fwNum === 11.50 || fwNum === 11.52) {
+            cachePage = "cacheslopkit.html";
+            scriptPath = "slopkit/chain_lapse.js";
+            isModule = true;
+        } else if (fwNum >= 12.00 && fwNum <= 14.02) {
+            cachePage = "cacheslopkit.html";
+            scriptPath = "slopkit/jb.js";
+            isModule = true;
+        } else {
             fail(
                 "Firmware não compatível",
                 "Versão detectada: " + fwVersion
@@ -450,73 +551,86 @@ footer strong { color: #aaa; }
             return;
         }
 
-        setStep(10, "Firmware detectado", "Versão " + fwVersion + " identificada.");
-        setStep(20, "Preparando cache", "Verificando os recursos offline.");
+        setStep(
+            25,
+            "Preparando ambiente",
+            "Selecionando os arquivos do firmware."
+        );
 
-        if (!cacheFrame) {
-            cacheFrame = document.createElement("iframe");
-            cacheFrame.setAttribute("aria-hidden", "true");
-            cacheFrame.tabIndex = -1;
-            cacheFrame.style.position = "absolute";
-            cacheFrame.style.width = "1px";
-            cacheFrame.style.height = "1px";
-            cacheFrame.style.left = "-10px";
-            cacheFrame.style.top = "0";
-            cacheFrame.style.opacity = "0";
-            cacheFrame.style.pointerEvents = "none";
-            cacheFrame.style.border = "0";
-            document.body.appendChild(cacheFrame);
+        if (isCacheEmpty()) {
+            setStep(
+                40,
+                "Preparando cache offline",
+                "Abrindo a página de cache correspondente."
+            );
+            window.location.replace(cachePage);
+            return;
         }
 
-        var completed = false;
+        setStep(
+            55,
+            "Carregando arquivos",
+            "Solicitando os arquivos do host."
+        );
 
-        cacheFrame.onload = function () {
-            if (completed) return;
-            completed = true;
+        loadScript(scriptPath, isModule, function () {
+            button.textContent = "PROCESSO INICIADO";
+            hint.textContent = "AGUARDE A RESPOSTA DO HOST";
 
-            setStep(
-                100,
-                "Página de cache carregada",
-                "A página foi aberta em segundo plano. A instalação offline precisa ser confirmada pelo mecanismo de cache."
+            if (fwNum >= 10.00 && fwNum <= 11.02) {
+                setStatus(
+                    "Preparando execução",
+                    "Aguardando a inicialização do módulo."
+                );
+
+                window.setTimeout(function () {
+                    if (typeof window.doJb === "function") {
+                        try {
+                            window.doJb();
+                        } catch (e) {
+                            fail(
+                                "Erro na execução",
+                                "O módulo retornou um erro."
+                            );
+                        }
+                    } else {
+                        fail(
+                            "Módulo não inicializado",
+                            "O arquivo foi carregado, mas a função doJb não foi encontrada."
+                        );
+                    }
+                }, 500);
+
+                return;
+            }
+
+            setProgress(100);
+            percentEl.textContent = "GoldHEN iniciado";
+            setStatus(
+                "Arquivos carregados",
+                "Script carregado. A confirmação do desbloqueio depende da resposta do host."
             );
-
-            button.disabled = false;
-            button.textContent = "RECARREGAR CACHE";
-            hint.textContent = "PÁGINA CARREGADA • CONFIRME O CACHE OFFLINE";
-            started = false;
-        };
-
-        cacheFrame.onerror = function () {
-            if (completed) return;
-            completed = true;
-            fail(
-                "Falha ao carregar cache",
-                "Não foi possível abrir " + cachePage + ". Confira se o arquivo existe."
-            );
-        };
-
-        setStep(45, "Abrindo recursos offline", "Carregando " + cachePage + ".");
-        cacheFrame.src = cachePage;
+        });
     }
 
     firmwareEl.textContent = fwVersion;
     headerFw.textContent = isPS4 ? "PS4 • " + fwVersion : "PS4 HOST";
 
     if (isPS4) {
-        setStep(
-            0,
+        setStatus(
             "Sistema identificado",
-            "Firmware " + fwVersion + " detectado. Pronto para preparar o cache."
+            "Firmware " + fwVersion + " detectado. Pronto para iniciar."
         );
     } else {
-        setStep(
-            0,
+        setStatus(
             "Aguardando início",
-            "Abra esta página no navegador do PS4 para detectar o firmware."
+            "Abra no navegador do PS4 para detectar o firmware."
         );
+        detailEl.textContent =
+            "Este host foi preparado para PlayStation 4.";
     }
 
-    button.addEventListener("click", beginCache);
+    button.addEventListener("click", beginHost);
 
     document.addEventListener("keydown", function (event) {
         if (
@@ -527,7 +641,7 @@ footer strong { color: #aaa; }
         ) {
             if (!started) {
                 event.preventDefault();
-                beginCache();
+                beginHost();
             }
         }
     });
