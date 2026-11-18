@@ -222,10 +222,8 @@ h1 span { color:var(--red); }
     letter-spacing:1.5px;
     box-shadow:0 8px 28px rgba(255,38,63,.18);
     cursor:pointer;
-
-    /* X e texto centralizados */
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
     align-items:center;
     justify-content:center;
     gap:8px;
@@ -408,33 +406,31 @@ footer strong { color:#aaa; }
         setStatus(title, detail);
     }
 
+    function resetButton(label) {
+        button.disabled = false;
+        button.innerHTML =
+            '<span class="x-icon">X</span><span>' +
+            label + '</span>';
+    }
+
     function fail(title, detail) {
         setStatus(title, detail);
-        button.disabled = false;
-        button.innerHTML = '<span class="x-icon">X</span><span>TENTAR NOVAMENTE</span>';
+        resetButton("TENTAR NOVAMENTE");
         hint.textContent = "VERIFIQUE OS ARQUIVOS E TENTE NOVAMENTE";
         started = false;
     }
 
     function absolutePath(path) {
-        /* Os arquivos ficam na raiz do site GitHub Pages. */
-        return new URL("/" + path.replace(/^\/+/, ""), window.location.href).href;
-    }
-
-    function isCacheEmpty() {
-        try {
-            return !!(
-                window.applicationCache &&
-                window.applicationCache.status === 0
-            );
-        } catch (e) {
-            return false;
-        }
+        return new URL(
+            path.replace(/^\/+/, ""),
+            new URL("/", window.location.href)
+        ).href;
     }
 
     function loadScript(src, isModule, onLoad) {
         var script = document.createElement("script");
         script.src = absolutePath(src);
+        script.async = true;
 
         if (isModule) {
             script.type = "module";
@@ -444,12 +440,14 @@ footer strong { color:#aaa; }
             fail(
                 "Falha ao carregar arquivo",
                 "Não foi possível carregar " + src +
-                ". Confira se o arquivo existe no GitHub."
+                ". Confira o nome e o caminho do arquivo no GitHub."
             );
         };
 
         script.onload = function () {
-            if (onLoad) onLoad();
+            if (typeof onLoad === "function") {
+                onLoad();
+            }
         };
 
         document.head.appendChild(script);
@@ -460,7 +458,8 @@ footer strong { color:#aaa; }
 
         started = true;
         button.disabled = true;
-        button.innerHTML = '<span class="x-icon">X</span><span>INICIALIZANDO...</span>';
+        button.innerHTML =
+            '<span class="x-icon">X</span><span>INICIALIZANDO...</span>';
         hint.textContent = "AGUARDE A RESPOSTA DO HOST";
 
         if (!isPS4) {
@@ -471,7 +470,8 @@ footer strong { color:#aaa; }
             return;
         }
 
-        setStep(10, "Firmware detectado", "Versão identificada: " + fwVersion);
+        setStep(10, "Firmware detectado",
+            "Versão identificada: " + fwVersion);
 
         var cachePage = "";
         var scriptPath = "";
@@ -508,30 +508,21 @@ footer strong { color:#aaa; }
         }
 
         setStep(25, "Preparando ambiente",
-                "Selecionando os arquivos do firmware.");
+            "Selecionando os arquivos do firmware.");
 
         /*
-         * Mantém a etapa de cache, mas usa URL absoluta
-         * para evitar redirecionamento para uma pasta errada.
+         * Não redireciona com base apenas em applicationCache.status:
+         * essa API pode não existir ou não representar o estado real
+         * do cache offline. A página de cache deve ser aberta
+         * explicitamente quando for necessário instalá-lo.
          */
-        if (isCacheEmpty()) {
-            setStep(40, "Preparando cache offline",
-                    "Abrindo a página de cache correspondente.");
-
-            window.location.href = absolutePath(cachePage);
-            return;
-        }
-
         setStep(55, "Carregando arquivos",
-                "Solicitando os arquivos do host.");
+            "Solicitando os arquivos do host.");
 
         loadScript(scriptPath, isModule, function () {
-            button.innerHTML = '<span class="x-icon">X</span><span>PROCESSO INICIADO</span>';
-            hint.textContent = "AGUARDE A RESPOSTA DO HOST";
-
             if (fwNum >= 10.00 && fwNum <= 11.02) {
                 setStatus("Preparando execução",
-                          "Aguardando a inicialização do módulo.");
+                    "Aguardando a inicialização do módulo.");
 
                 window.setTimeout(function () {
                     if (typeof window.doJb === "function") {
@@ -539,7 +530,7 @@ footer strong { color:#aaa; }
                             window.doJb();
                         } catch (e) {
                             fail("Erro na execução",
-                                 "O módulo retornou um erro.");
+                                "O módulo retornou um erro.");
                         }
                     } else {
                         fail(
@@ -552,11 +543,15 @@ footer strong { color:#aaa; }
                 return;
             }
 
-            setProgress(100, "GoldHEN");
+            setProgress(100, "100%");
             setStatus(
                 "Arquivos carregados",
-                "O script foi carregado. A confirmação do desbloqueio depende da resposta do host."
+                "O script foi carregado. Isso não confirma, por si só, que o cache ou o desbloqueio foi concluído."
             );
+
+            resetButton("PROCESSO INICIADO");
+            hint.textContent = "VERIFIQUE A RESPOSTA DO HOST";
+            started = false;
         });
     }
 
@@ -573,7 +568,8 @@ footer strong { color:#aaa; }
             "Aguardando início",
             "Abra no navegador do PS4 para detectar o firmware."
         );
-        detailEl.textContent = "Este host foi preparado para PlayStation 4.";
+        detailEl.textContent =
+            "Este host foi preparado para PlayStation 4.";
     }
 
     button.addEventListener("click", beginHost);
