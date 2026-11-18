@@ -1,140 +1,358 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0b0b0e">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050505">
+<title>RayZenX | PS4 Host</title>
 
-    <title>PS4 [5.05] 7.00 - 14.02 | RayZenX</title>
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    <link rel="stylesheet" href="style.css">
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #050505;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background:
+        radial-gradient(ellipse at 50% 48%,
+        rgba(110, 0, 0, .23) 0%,
+        rgba(25, 0, 0, .12) 35%,
+        transparent 72%),
+        #050505;
+}
+
+header {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    padding: 0 7%;
+    border-bottom: 1px solid #350909;
+    background: rgba(0, 0, 0, .7);
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.logo span {
+    color: #ed1717;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.content {
+    width: 100%;
+    max-width: 620px;
+    text-align: center;
+}
+
+.symbol {
+    width: 94px;
+    height: 94px;
+    margin: 0 auto 32px;
+    border: 2px solid #c51616;
+    transform: rotate(45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 35px rgba(220, 0, 0, .15);
+}
+
+.symbol span {
+    transform: rotate(-45deg);
+    font-size: 35px;
+    font-weight: 900;
+    color: #f21b1b;
+}
+
+.tag {
+    color: #a82020;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    margin-bottom: 18px;
+}
+
+h2 {
+    font-size: clamp(34px, 7vw, 59px);
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 1.1;
+}
+
+h2 span {
+    color: #e71919;
+}
+
+.description {
+    margin: 19px 0 37px;
+    color: #888;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+#start {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-width: 260px;
+    min-height: 62px;
+    padding: 16px 26px;
+    color: white;
+    background: linear-gradient(110deg, #a50909, #ed1717);
+    border: 1px solid #ff4545;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(220, 0, 0, .18);
+}
+
+.cross {
+    width: 25px;
+    height: 25px;
+    border: 2px solid white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+}
+
+#start:disabled {
+    opacity: .75;
+}
+
+.progress-area {
+    margin: 32px auto 0;
+    max-width: 390px;
+    display: none;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 10px;
+    color: #aaa;
+    letter-spacing: 2px;
+}
+
+#percent {
+    color: #f22;
+}
+
+.track {
+    height: 4px;
+    background: #252525;
+    overflow: hidden;
+}
+
+#bar {
+    width: 0%;
+    height: 100%;
+    background: #ed1717;
+    box-shadow: 0 0 12px #f00;
+}
+
+#status {
+    margin-top: 17px;
+    min-height: 16px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #aaa;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    color: #454545;
+    font-size: 10px;
+    letter-spacing: 3px;
+    border-top: 1px solid #1c0909;
+}
+
+@media (max-height: 550px) {
+    header { height: 55px; }
+    .symbol {
+        width: 58px;
+        height: 58px;
+        margin-bottom: 18px;
+    }
+    .symbol span { font-size: 25px; }
+    .description { margin: 12px 0 20px; }
+    .progress-area { margin-top: 18px; }
+    footer { padding: 12px; }
+}
+</style>
 </head>
 
 <body>
 
+<header>
+    <div class="logo">RayZen<span>X</span></div>
+</header>
+
+<main>
+    <section class="content">
+
+        <div class="symbol">
+            <span>RX</span>
+        </div>
+
+        <p class="tag">PLAYSTATION 4</p>
+
+        <h2>YOUR CONSOLE.<br>
+            <span>YOUR RULES.</span>
+        </h2>
+
+        <p class="description">
+            RAYZENX SYSTEM INTERFACE
+        </p>
+
+        <button id="start" type="button">
+            <span class="cross">×</span>
+            APERTE X PARA COMEÇAR
+        </button>
+
+        <div class="progress-area" id="progressArea">
+            <div class="progress-info">
+                <span id="progressLabel">INICIALIZANDO</span>
+                <span id="percent">0%</span>
+            </div>
+
+            <div class="track">
+                <div id="bar"></div>
+            </div>
+
+            <p id="status">Aguardando inicialização...</p>
+        </div>
+
+    </section>
+</main>
+
+<footer>
+    RAYZENX · PS4 HOST
+</footer>
+
 <script>
-var uaFull = navigator.userAgent;
-var match = uaFull.match(/PlayStation 4[ /]([\d.]+)/i);
-var isPS4 = match !== null;
-var fwVersion = isPS4 ? match[1] : "Desconhecida";
-var fwNum = parseFloat(fwVersion);
+(function () {
+    var start = document.getElementById('start');
+    var area = document.getElementById('progressArea');
+    var bar = document.getElementById('bar');
+    var percent = document.getElementById('percent');
+    var status = document.getElementById('status');
+    var label = document.getElementById('progressLabel');
+    var started = false;
 
-function onScriptError() {
-    msgs.innerHTML =
-        "Conteúdo não encontrado! Limpe os dados do navegador e instale o cache novamente.";
-}
+    function begin() {
+        if (started) return;
+        started = true;
 
-if (!isPS4) {
-    document.addEventListener("DOMContentLoaded", function () {
-        msgs.innerHTML =
-            "Este host foi desenvolvido para PS4 com firmware 5.05 ou versões de 7.00 até 14.02.";
-    });
-} else {
-    if (window.applicationCache.status == 0) {
+        start.disabled = true;
+        start.innerHTML = 'INICIALIZANDO...';
+        area.style.display = 'block';
 
-        if (fwNum == 5.05 || fwNum == 5.07) {
-            window.location.replace("cache505.html");
+        /*
+         * A interface está pronta.
+         * Conecte aqui o código de execução do
+         * exploit original do seu host G2All.
+         * A barra abaixo é apenas visual e não
+         * representa a execução real do exploit.
+         */
 
-        } else if (fwNum >= 7.00 && fwNum <= 8.52) {
-            window.location.replace("cache700.html");
+        var progress = 0;
 
-        } else if (fwNum >= 9.00 && fwNum <= 9.60) {
-            window.location.replace("cache900.html");
+        var timer = setInterval(function () {
+            progress += 2;
 
-        } else if (fwNum >= 10.00 && fwNum <= 11.02) {
-            window.location.replace("cachecss.html");
+            if (progress > 100) progress = 100;
 
-        } else if (fwNum >= 11.50 && fwNum <= 14.02) {
-            window.location.replace("cacheslopkit.html");
+            bar.style.width = progress + '%';
+            percent.textContent = progress + '%';
 
-        } else {
-            document.addEventListener("DOMContentLoaded", function () {
-                msgs.innerHTML =
-                    'Firmware não compatível: <span style="color:red;">' +
-                    fwVersion +
-                    '</span>';
-            });
-        }
-
-    } else {
-
-        if (fwNum == 5.05 || fwNum == 5.07) {
-            var script = document.createElement("script");
-            script.src = "505/exploit.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-
-        } else if (fwNum >= 7.00 && fwNum <= 8.52) {
-            var script = document.createElement("script");
-            script.type = "module";
-            script.src = "700/alert.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-
-        } else if (fwNum >= 9.00 && fwNum <= 9.60) {
-            var script = document.createElement("script");
-            script.type = "module";
-            script.src = "900/alert.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-
-        } else if (fwNum >= 10.00 && fwNum <= 11.02) {
-            var script = document.createElement("script");
-            script.src = "css/main.js";
-            script.onerror = onScriptError;
-
-            script.onload = function () {
-                setTimeout(function () {
-                    doJb();
-                }, 500);
-            };
-
-            document.head.appendChild(script);
-
-        } else if (fwNum == 11.50 || fwNum == 11.52) {
-            var script = document.createElement("script");
-            script.type = "module";
-            script.src = "slopkit/chain_lapse.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-
-        } else if (fwNum >= 12.00 && fwNum <= 14.02) {
-            var script = document.createElement("script");
-            script.type = "module";
-            script.src = "slopkit/jb.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
+            if (progress < 35) {
+                label.textContent = 'INICIALIZANDO';
+                status.textContent = 'Preparando interface...';
+            } else if (progress < 70) {
+                label.textContent = 'PREPARANDO';
+                status.textContent = 'Aguardando o carregador do host...';
+            } else if (progress < 100) {
+                label.textContent = 'AGUARDANDO';
+                status.textContent = 'A execução do exploit não está conectada.';
+            } else {
+                clearInterval(timer);
+                label.textContent = 'AGUARDANDO HOST';
+                status.textContent =
+                    'Conecte o código original do exploit para continuar.';
+                start.disabled = false;
+                start.innerHTML =
+                    '<span class="cross">×</span> TENTAR NOVAMENTE';
+                started = false;
+            }
+        }, 80);
     }
-}
+
+    start.addEventListener('click', begin);
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            begin();
+        }
+    });
+
+    // Botão X do controle PS4: Cross.
+    window.addEventListener('gamepadconnected', function () {
+        function pollGamepad() {
+            if (started) {
+                requestAnimationFrame(pollGamepad);
+                return;
+            }
+
+            var pads = navigator.getGamepads ?
+                navigator.getGamepads() : [];
+
+            for (var i = 0; i < pads.length; i++) {
+                var pad = pads[i];
+
+                if (pad && pad.buttons[0] && pad.buttons[0].pressed) {
+                    begin();
+                    break;
+                }
+            }
+
+            requestAnimationFrame(pollGamepad);
+        }
+
+        requestAnimationFrame(pollGamepad);
+    });
+})();
 </script>
-
-<h1>PS4 [5.05] 7.00 - 14.02 | RayZenX</h1>
-
-<hr>
-
-<br>
-
-<h1 id="msgs"
-    style="font-size:30px; margin-top:77px; margin-bottom:455px;">
-    Carregando o GoldHEN v2.4b18.14... Aguarde
-</h1>
-
-<h1 style="margin-top:43px;">
-    Agradecimentos especiais a:
-    <a href="https://twitter.com/_AlAzif"
-       style="color:#f31414; margin-left:10px; margin-right:10px;">
-        @_AlAzif
-    </a>
-    ChendoChap
-    <a href="https://x.com/Kameleonre_"
-       style="color:#f31414; margin-left:10px; margin-right:10px;">
-        @Kameleonre_
-    </a>
-    SiSTR0 e Abc
-</h1>
 
 </body>
 </html>
-```
