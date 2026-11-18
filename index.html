@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0b0e">
+    <title>RayZenX9 | PS4 Host</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="brand">
+        <span class="brand-mark">R<span>X</span></span>
+        <div>
+            <h1 id="msgs">RayZenX9</h1>
+            <p>PLAYSTATION 4 · HOST DE EXPLOIT</p>
+        </div>
+    </div>
+
+    <span class="status">
+        <span class="status-dot"></span>
+        HOST LOCAL
+    </span>
+</header>
+
+<main class="container">
+
+    <section class="intro">
+        <span class="eyebrow">RAYZENX9 / SISTEMA</span>
+
+        <h2>
+            Seu console.<br>
+            <span>Seu controle.</span>
+        </h2>
+
+        <p>
+            Selecione a versão do sistema do seu PS4 para acessar
+            o host correspondente.
+        </p>
+    </section>
+
+    <section id="menu" class="menu">
+
+        <div class="section-heading">
+            <h3>Versões do sistema</h3>
+            <span>FIRMWARE</span>
+        </div>
+
+        <div class="firmware-grid">
+
+            <button class="firmware-card featured"
+                onmouseover="setMessage('Host GoldHEN com seleção automática para firmwares compatíveis de 5.05 a 14.02.')"
+                onmouseout="resetMessage()"
+                onclick="location.href='g2all/index.html'">
+                <span class="card-index">01 / MULTI</span>
+                <span class="card-title">GoldHEN Multi FW</span>
+                <span class="card-description">Seleção automática do exploit</span>
+                <span class="card-arrow">↗</span>
+            </button>
+
+            <button class="firmware-card"
+                onmouseover="setMessage('Host para firmware 5.05, versão 2.5.')"
+                onmouseout="resetMessage()"
+                onclick="location.href='505/index.html'">
+                <span class="card-index">02 / FIRMWARE</span>
+                <span class="card-title">Firmware 5.05</span>
+                <span class="card-description">Host versão 2.5</span>
+                <span class="card-arrow">↗</span>
+            </button>
+
+            <button class="firmware-card"
+                onmouseover="setMessage('Host GoldHEN para firmware 6.72.')"
+                onmouseout="resetMessage()"
+                onclick="location.href='672goldhen/index.html'">
+                <span class="card-index">03 / GOLDHEN</span>
+                <span class="card-title">Firmware 6.72</span>
+                <span class="card-description">Versão GoldHEN</span>
+                <span class="card-arrow">↗</span>
+            </button>
+
+            <button class="firmware-card"
+                onmouseover="setMessage('Host para firmware 6.72, versão 3.0.')"
+                onmouseout="resetMessage()"
+                onclick="location.href='672/index.html'">
+                <span class="card-index">04 / FIRMWARE</span>
+                <span class="card-title">Firmware 6.72</span>
+                <span class="card-description">Host versão 3.0</span>
+                <span class="card-arrow">↗</span>
+            </button>
+
+            <button class="firmware-card"
+                onmouseover="setMessage('Host GoldHEN para firmware 9.00.')"
+                onmouseout="resetMessage()"
+                onclick="location.href='900goldhen/index.html'">
+                <span class="card-index">05 / GOLDHEN</span>
+                <span class="card-title">Firmware 9.00</span>
+                <span class="card-description">Versão GoldHEN</span>
+                <span class="card-arrow">↗</span>
+            </button>
+
+            <button class="firmware-card"
+                onmouseover="setMessage('Host para firmware 9.00, versão 3.0.')"
+                onmouseout="resetMessage()"
+                onclick="location.href='900v3/index.html'">
+                <span class="card-index">06 / FIRMWARE</span>
+                <span class="card-title">Firmware 9.00</span>
+                <span class="card-description">Host versão 3.0</span>
+                <span class="card-arrow">↗</span>
+            </button>
+
+        </div>
+
+        <button class="utility-button"
+            onmouseover="setMessage('Restaura o host ao Guia do Usuário sem utilizar DNS.')"
+            onmouseout="resetMessage()"
+            onclick="location.href='restore/index.html'">
+
+            <span class="utility-icon">↺</span>
+
+            <span>
+                <strong>Restaurar host</strong>
+                <small>Retornar ao Guia do Usuário sem DNS</small>
+            </span>
+
+            <span class="card-arrow">↗</span>
+        </button>
+
+    </section>
+
+    <div class="message-bar">
+        <span class="message-indicator"></span>
+        <p id="description">Selecione uma opção para continuar.</p>
+    </div>
+
+</main>
+
+<footer class="footer">
+    <span>RayZenX9</span>
+    <span>PROJETO INDEPENDENTE · PS4 HOST</span>
+</footer>
+
+<script>
+function setMessage(message) {
+    document.getElementById('description').textContent = message;
+}
+
+function resetMessage() {
+    document.getElementById('description').textContent =
+        'Selecione uma opção para continuar.';
+}
+</script>
+
+</body>
+</html>
