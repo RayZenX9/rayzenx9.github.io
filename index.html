@@ -1,341 +1,67 @@
-/* ==================================================
-   RAYZENX — PS4 HOST
-   Premium Black & Red Interface
-   ================================================== */
-
-:root {
-    --bg: #050505;
-    --panel: rgba(15, 15, 18, 0.94);
-    --red: #ed1717;
-    --red-light: #ff3838;
-    --text: #f5f5f5;
-    --muted: #92929e;
-    --border: rgba(237, 23, 23, 0.35);
-    --glow: rgba(237, 23, 23, 0.22);
-}
-
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-}
-
-html {
-    min-height: 100%;
-    background-color: var(--bg);
-    background-image:
-        linear-gradient(
-            180deg,
-            rgba(5, 5, 5, 0.72),
-            rgba(5, 5, 5, 0.96)
-        ),
-        url('img.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
-    color: var(--text);
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-
-    overflow-x: hidden;
-}
-
-body {
-    margin: 0;
-    min-height: 100vh;
-    padding: 24px 16px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    background: transparent;
-}
-
-/* CABEÇALHO */
-
-h1 {
-    max-width: 100%;
-    margin: 12px 0;
-
-    color: var(--text);
-    font-size: 30px;
-    font-weight: 900;
-    line-height: 1.4;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-
-    text-shadow: 0 0 20px var(--glow);
-    overflow-wrap: anywhere;
-}
-
-/* LINHA DIVISÓRIA */
-
-hr {
-    width: 100%;
-    max-width: 760px;
-    height: 1px;
-
-    margin: 20px auto;
-
-    border: 0;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        var(--red),
-        transparent
-    );
-
-    box-shadow: 0 0 10px var(--glow);
-}
-
-/* MENSAGENS DO HOST */
-
-#msgs {
-    width: 100%;
-    max-width: 850px;
-    min-height: 90px;
-
-    margin: 65px auto 35px;
-    padding: 12px;
-
-    color: var(--text);
-    font-size: 27px;
-    font-weight: 700;
-    line-height: 1.5;
-
-    text-shadow: 0 0 16px var(--glow);
-    overflow-wrap: anywhere;
-}
-
-/* TEXTOS SECUNDÁRIOS */
-
-p {
-    color: var(--muted);
-    line-height: 1.6;
-}
-
-small {
-    color: var(--muted);
-}
-
-/* LINKS */
-
-a {
-    color: var(--red-light);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-a:hover {
-    color: #ffffff;
-}
-
-/* BOTÕES */
-
-button,
-.btn,
-#startBtn,
-#startButton {
-    min-height: 54px;
-    padding: 15px 28px;
-
-    border: 1px solid var(--red);
-    border-radius: 8px;
-
-    background: linear-gradient(
-        135deg,
-        #f12626,
-        #a90000
-    );
-
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 900;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-
-    box-shadow:
-        0 0 18px rgba(237, 23, 23, 0.18),
-        inset 0 1px 0 rgba(255, 255, 255, 0.12);
-
-    cursor: pointer;
-    transition: background 0.2s ease, box-shadow 0.2s ease;
-}
-
-button:active,
-.btn:active,
-#startBtn:active,
-#startButton:active {
-    background: #a90000;
-    box-shadow: 0 0 24px var(--glow);
-}
-
-/* BARRA DE PROGRESSO */
-
-progress {
-    display: block;
-    width: 100%;
-    max-width: 600px;
-    height: 14px;
-
-    margin: 20px auto;
-
-    appearance: none;
-    -webkit-appearance: none;
-
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
-
-    background: #181818;
-}
-
-progress::-webkit-progress-bar {
-    background: #181818;
-    border-radius: 20px;
-}
-
-progress::-webkit-progress-value {
-    background: linear-gradient(
-        90deg,
-        #a90000,
-        var(--red-light)
-    );
-    border-radius: 20px;
-    box-shadow: 0 0 12px var(--glow);
-}
-
-progress::-moz-progress-bar {
-    background: linear-gradient(
-        90deg,
-        #a90000,
-        var(--red-light)
-    );
-    border-radius: 20px;
-}
-
-/* CLASSES OPCIONAIS DE PROGRESSO */
-
-.progress-container,
-.progress-wrapper {
-    width: 100%;
-    max-width: 600px;
-    margin: 20px auto;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 14px;
-
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
-
-    background: #181818;
-}
-
-.progress-fill {
-    width: 0%;
-    height: 100%;
-
-    background: linear-gradient(
-        90deg,
-        #a90000,
-        var(--red-light)
-    );
-
-    border-radius: inherit;
-    box-shadow: 0 0 12px var(--glow);
-    transition: width 0.3s ease;
-}
-
-.progress-text,
-#progressText,
-#percentage {
-    margin-top: 10px;
-
-    color: var(--red-light);
-    font-size: 15px;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-/* ESTADOS E INFORMAÇÕES */
-
-#status,
-.status {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-.loading,
-.loading-text {
-    color: var(--red-light);
-    font-weight: 700;
-}
-
-/* RESPONSIVIDADE */
-
-@media (max-width: 600px) {
-    body {
-        padding: 16px 10px;
-    }
-
-    h1 {
-        font-size: 23px;
-        letter-spacing: 2px;
-    }
-
-    #msgs {
-        margin-top: 45px;
-        margin-bottom: 30px;
-        font-size: 22px;
-    }
-
-    button,
-    .btn,
-    #startBtn,
-    #startButton {
-        width: 100%;
-        max-width: 340px;
-        padding: 15px 12px;
-        font-size: 14px;
-    }
-}
-
-/* TELAS PEQUENAS */
-
-@media (max-width: 360px) {
-    h1 {
-        font-size: 19px;
-        letter-spacing: 1px;
-    }
-
-    #msgs {
-        font-size: 19px;
-        margin-top: 30px;
-    }
-}
-
-/* TELAS COM POUCA ALTURA */
-
-@media (max-height: 500px) {
-    body {
-        padding-top: 8px;
-    }
-
-    h1 {
-        font-size: 22px;
-        margin: 5px 0;
-    }
-
-    #msgs {
-        margin-top: 20px;
-        margin-bottom: 15px;
-        min-height: 50px;
-        font-size: 20px;
-    }
-}
+<style> /\* RAYZENX — PS4 HOST \*/
+
+:root { --bg: #050505; --panel: rgba(15, 15, 18, 0.94); --red: #ed1717; --red-light: #ff3838; --text: #f5f5f5; --muted: #92929e; --border: rgba(237, 23, 23, 0.35); --glow: rgba(237, 23, 23, 0.22); }
+
+\* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html { min-height: 100%; background-color: var(--bg); background-image: linear-gradient(180deg, rgba(5,5,5,.72), rgba(5,5,5,.96)), url('img.jpg'); background-position: center; background-size: cover; background-repeat: no-repeat; background-attachment: fixed; color: var(--text); font-family: Arial, Helvetica, sans-serif; text-align: center; overflow-x: hidden; }
+
+body { margin: 0; min-height: 100vh; padding: 24px 16px; display: flex; flex-direction: column; align-items: center; background: transparent; }
+
+h1 { max-width: 100%; margin: 12px 0; color: var(--text); font-size: 30px; font-weight: 900; line-height: 1.4; letter-spacing: 3px; text-transform: uppercase; text-shadow: 0 0 20px var(--glow); overflow-wrap: anywhere; }
+
+hr { width: 100%; max-width: 760px; height: 1px; margin: 20px auto; border: 0; background: linear-gradient(90deg, transparent, var(--red), transparent); box-shadow: 0 0 10px var(--glow); }
+
+#msgs { width: 100%; max-width: 850px; min-height: 90px; margin: 65px auto 35px; padding: 12px; color: var(--text); font-size: 27px; font-weight: 700; line-height: 1.5; text-shadow: 0 0 16px var(--glow); overflow-wrap: anywhere; }
+
+p { color: var(--muted); line-height: 1.6; }
+
+small { color: var(--muted); }
+
+a { color: var(--red-light); text-decoration: none; }
+
+a:hover { color: #fff; }
+
+button, .btn, #startBtn, #startButton { min-height: 54px; padding: 15px 28px; border: 1px solid var(--red); border-radius: 8px; background: linear-gradient(135deg, #f12626, #a90000); color: #fff; font-size: 16px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 0 18px rgba(237,23,23,.18), inset 0 1px 0 rgba(255,255,255,.12); cursor: pointer; }
+
+button:active, .btn:active, #startBtn:active, #startButton:active { background: #a90000; box-shadow: 0 0 24px var(--glow); }
+
+button:disabled { opacity: .6; cursor: default; }
+
+progress { display: block; width: 100%; max-width: 600px; height: 14px; margin: 20px auto; appearance: none; -webkit-appearance: none; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; background: #181818; }
+
+progress::-webkit-progress-bar { background: #181818; }
+
+progress::-webkit-progress-value { background: linear-gradient(90deg, #a90000, var(--red-light)); box-shadow: 0 0 12px var(--glow); }
+
+progress::-moz-progress-bar { background: linear-gradient(90deg, #a90000, var(--red-light)); }
+
+.progress-container, .progress-wrapper { width: 100%; max-width: 600px; margin: 20px auto; }
+
+.progress-bar { width: 100%; height: 14px; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; background: #181818; }
+
+.progress-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #a90000, var(--red-light)); border-radius: inherit; box-shadow: 0 0 12px var(--glow); transition: width .3s ease; }
+
+.progress-text, #progressText, #percentage { margin-top: 10px; color: var(--red-light); font-size: 15px; font-weight: 800; letter-spacing: 1px; }
+
+#status, .status { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+.loading, .loading-text { color: var(--red-light); font-weight: 700; }
+
+@media (max-width: 600px) { body { padding: 16px 10px; }
+
+h1 { font-size: 23px; letter-spacing: 2px; }
+
+#msgs { margin-top: 45px; margin-bottom: 30px; font-size: 22px; }
+
+button, .btn, #startBtn, #startButton { width: 100%; max-width: 340px; padding: 15px 12px; font-size: 14px; } }
+
+@media (max-width: 360px) { h1 { font-size: 19px; letter-spacing: 1px; }
+
+#msgs { font-size: 19px; margin-top: 30px; } }
+
+@media (max-height: 500px) { body { padding-top: 8px; }
+
+h1 { font-size: 22px; margin: 5px 0; }
+
+#msgs { margin-top: 20px; margin-bottom: 15px; min-height: 50px; font-size: 20px; } } </style>
