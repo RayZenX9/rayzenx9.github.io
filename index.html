@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,337 +9,301 @@
 
 <style>
 :root {
-    --bg: #080808;
-    --panel: #101010;
-    --red: #ff263f;
-    --white: #f5f5f5;
-    --muted: #888;
-    --line: rgba(255,255,255,.1);
+    --bg:#080808;
+    --panel:#101010;
+    --red:#ff263f;
+    --white:#f5f5f5;
+    --muted:#888;
+    --line:rgba(255,255,255,.1);
 }
-
-* { box-sizing: border-box; }
-
-html, body {
-    margin: 0;
-    min-height: 100%;
-    background: var(--bg);
-    color: var(--white);
-    font-family: Arial, Helvetica, sans-serif;
+* { box-sizing:border-box; }
+html,body {
+    margin:0;
+    min-height:100%;
+    background:var(--bg);
+    color:var(--white);
+    font-family:Arial,Helvetica,sans-serif;
 }
-
 body {
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    overflow-x: hidden;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    padding:20px;
+    overflow-x:hidden;
     background:
-        radial-gradient(ellipse at 50% 35%,
-            rgba(255,38,63,.10), transparent 55%),
-        linear-gradient(145deg, #101010, #050505 70%);
+        radial-gradient(ellipse at 50% 35%,rgba(255,38,63,.10),transparent 55%),
+        linear-gradient(145deg,#101010,#050505 70%);
 }
-
 .top-glow {
-    position: fixed;
-    z-index: 5;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(
-        90deg, transparent, var(--red), #ff8793, var(--red), transparent
-    );
-    box-shadow: 0 0 20px rgba(255,38,63,.5);
+    position:fixed;
+    z-index:5;
+    top:0;
+    left:0;
+    width:100%;
+    height:3px;
+    background:linear-gradient(90deg,transparent,var(--red),#ff8793,var(--red),transparent);
+    box-shadow:0 0 20px rgba(255,38,63,.5);
 }
-
-header, footer {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
+header,footer {
+    width:100%;
+    max-width:900px;
+    margin:0 auto;
 }
-
 header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 8px 0 20px;
-    border-bottom: 1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:8px 0 20px;
+    border-bottom:1px solid var(--line);
 }
-
 .brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
-
 .logo {
-    width: 43px;
-    height: 43px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255,38,63,.65);
-    border-radius: 10px;
-    color: var(--red);
-    font-size: 26px;
-    font-weight: 900;
-    background: #16090b;
-    box-shadow: 0 0 25px rgba(255,38,63,.08);
+    width:43px;
+    height:43px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(255,38,63,.65);
+    border-radius:10px;
+    color:var(--red);
+    font-size:26px;
+    font-weight:900;
+    background:#16090b;
+    box-shadow:0 0 25px rgba(255,38,63,.08);
 }
-
 .brand-name {
-    font-size: 20px;
-    font-weight: 900;
-    letter-spacing: 2px;
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:2px;
 }
-
-.brand-name span { color: var(--red); }
-
+.brand-name span { color:var(--red); }
 .brand-sub {
-    margin-top: 5px;
-    color: var(--muted);
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    margin-top:5px;
+    color:var(--muted);
+    font-size:9px;
+    letter-spacing:2px;
+    text-transform:uppercase;
 }
-
 .fw-badge {
-    padding: 9px 11px;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    color: #aaa;
-    font-size: 10px;
-    letter-spacing: 1px;
-    white-space: nowrap;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    color:#aaa;
+    font-size:10px;
+    letter-spacing:1px;
+    white-space:nowrap;
 }
-
 main {
-    width: 100%;
-    max-width: 650px;
-    margin: auto;
-    padding: 55px 0;
-    align-self: center;
+    width:100%;
+    max-width:650px;
+    margin:auto;
+    padding:55px 0;
+    align-self:center;
 }
-
 .eyebrow {
-    color: var(--red);
-    text-align: center;
-    font-size: 10px;
-    font-weight: bold;
-    letter-spacing: 4px;
+    color:var(--red);
+    text-align:center;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:4px;
 }
-
 h1 {
-    margin: 22px 0 14px;
-    text-align: center;
-    font-size: clamp(38px, 8vw, 64px);
-    font-weight: 900;
-    letter-spacing: -2px;
-    line-height: 1.03;
+    margin:22px 0 14px;
+    text-align:center;
+    font-size:clamp(38px,8vw,64px);
+    font-weight:900;
+    letter-spacing:-2px;
+    line-height:1.03;
 }
-
-h1 span { color: var(--red); }
-
+h1 span { color:var(--red); }
 .intro {
-    max-width: 430px;
-    margin: 0 auto;
-    color: #999;
-    text-align: center;
-    font-size: 13px;
-    line-height: 1.8;
+    max-width:430px;
+    margin:0 auto;
+    color:#999;
+    text-align:center;
+    font-size:13px;
+    line-height:1.8;
 }
-
 .panel {
-    margin-top: 35px;
-    padding: 25px;
-    border: 1px solid rgba(255,38,63,.23);
-    border-radius: 13px;
-    background: linear-gradient(140deg, #151515, #0c0c0c);
-    box-shadow: 0 25px 70px rgba(0,0,0,.4);
-    position: relative;
-    overflow: hidden;
+    margin-top:35px;
+    padding:25px;
+    border:1px solid rgba(255,38,63,.23);
+    border-radius:13px;
+    background:linear-gradient(140deg,#151515,#0c0c0c);
+    box-shadow:0 25px 70px rgba(0,0,0,.4);
+    position:relative;
+    overflow:hidden;
 }
-
 .panel:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(var(--red), transparent);
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:3px;
+    height:100%;
+    background:linear-gradient(var(--red),transparent);
 }
-
 .panel-label {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    color: #999;
-    font-size: 10px;
-    font-weight: bold;
-    letter-spacing: 2px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    color:#999;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:2px;
 }
-
 .dot {
-    width: 7px;
-    height: 7px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: var(--red);
-    box-shadow: 0 0 10px var(--red);
+    width:7px;
+    height:7px;
+    flex-shrink:0;
+    border-radius:50%;
+    background:var(--red);
+    box-shadow:0 0 10px var(--red);
 }
-
 #status {
-    margin: 20px 0 8px;
-    font-size: 22px;
-    line-height: 1.4;
-    font-weight: 800;
-    overflow-wrap: anywhere;
+    margin:20px 0 8px;
+    font-size:22px;
+    line-height:1.4;
+    font-weight:800;
+    overflow-wrap:anywhere;
 }
-
 #detail {
-    min-height: 34px;
-    color: #929292;
-    font-size: 12px;
-    line-height: 1.7;
-    overflow-wrap: anywhere;
+    min-height:34px;
+    color:#929292;
+    font-size:12px;
+    line-height:1.7;
+    overflow-wrap:anywhere;
 }
-
 .fw-info {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    margin-top: 22px;
-    color: #777;
-    font-size: 10px;
-    letter-spacing: 1px;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:22px;
+    color:#777;
+    font-size:10px;
+    letter-spacing:1px;
 }
-
-.fw-info strong { color: #eee; }
-
+.fw-info strong { color:#eee; }
 .progress-track {
-    width: 100%;
-    height: 5px;
-    margin-top: 12px;
-    border-radius: 5px;
-    overflow: hidden;
-    background: #292929;
+    width:100%;
+    height:5px;
+    margin-top:12px;
+    border-radius:5px;
+    overflow:hidden;
+    background:#292929;
 }
-
 .progress {
-    width: 0%;
-    height: 100%;
-    border-radius: inherit;
-    background: linear-gradient(90deg, #a90018, var(--red), #ff8491);
-    box-shadow: 0 0 14px rgba(255,38,63,.55);
-    transition: width .35s ease;
+    width:0%;
+    height:100%;
+    border-radius:inherit;
+    background:linear-gradient(90deg,#a90018,var(--red),#ff8491);
+    box-shadow:0 0 14px rgba(255,38,63,.55);
+    transition:width .35s ease;
 }
-
 .start-wrap {
-    margin-top: 25px;
-    text-align: center;
+    margin-top:25px;
+    text-align:center;
 }
-
 .start-button {
-    width: 100%;
-    min-height: 62px;
-    padding: 14px 18px;
-    border: 1px solid #ff5265;
-    border-radius: 8px;
-    background: linear-gradient(110deg, #d90d29, #ff263f);
-    color: white;
-    font-size: 14px;
-    font-weight: 900;
-    letter-spacing: 1.5px;
-    box-shadow: 0 8px 28px rgba(255,38,63,.18);
-    cursor: pointer;
-}
+    width:100%;
+    min-height:62px;
+    padding:14px 18px;
+    border:1px solid #ff5265;
+    border-radius:8px;
+    background:linear-gradient(110deg,#d90d29,#ff263f);
+    color:white;
+    font-size:14px;
+    font-weight:900;
+    letter-spacing:1.5px;
+    box-shadow:0 8px 28px rgba(255,38,63,.18);
+    cursor:pointer;
 
-.start-button:active {
-    background: #b90c22;
+    /* X e texto centralizados */
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    text-align:center;
 }
-
+.start-button:active { background:#b90c22; }
 .start-button:disabled {
-    opacity: .55;
-    cursor: default;
+    opacity:.55;
+    cursor:default;
 }
-
 .x-icon {
-    display: inline-flex;
-    width: 26px;
-    height: 26px;
-    margin-right: 8px;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255,255,255,.7);
-    border-radius: 50%;
-    font-size: 15px;
+    display:flex;
+    width:30px;
+    height:30px;
+    margin:0;
+    padding:0;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(255,255,255,.7);
+    border-radius:50%;
+    font-size:17px;
+    font-weight:bold;
+    line-height:1;
+    text-align:center;
+    flex-shrink:0;
 }
-
 .hint {
-    margin-top: 12px;
-    color: #777;
-    font-size: 10px;
-    letter-spacing: 1px;
+    margin-top:12px;
+    color:#777;
+    font-size:10px;
+    letter-spacing:1px;
 }
-
 .features {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 9px;
-    margin-top: 20px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-top:20px;
 }
-
 .feature {
-    padding: 9px 11px;
-    border: 1px solid var(--line);
-    border-radius: 5px;
-    color: #aaa;
-    font-size: 9px;
-    letter-spacing: .7px;
+    padding:9px 11px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    color:#aaa;
+    font-size:9px;
+    letter-spacing:.7px;
 }
-
-.feature span { color: var(--red); }
-
+.feature span { color:var(--red); }
 footer {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 17px 0 3px;
-    border-top: 1px solid var(--line);
-    color: #666;
-    font-size: 9px;
-    letter-spacing: 1px;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    padding:17px 0 3px;
+    border-top:1px solid var(--line);
+    color:#666;
+    font-size:9px;
+    letter-spacing:1px;
 }
-
-footer strong { color: #aaa; }
-
-@media (max-width: 480px) {
-    body { padding: 15px; }
-    .logo { width: 36px; height: 36px; font-size: 22px; }
-    .brand-name { font-size: 17px; }
-    .brand-sub { font-size: 8px; letter-spacing: 1px; }
-    .fw-badge { font-size: 8px; padding: 8px 6px; }
-    main { padding: 40px 0; }
-    h1 { font-size: 42px; }
-    .panel { padding: 20px 17px; }
-    #status { font-size: 20px; }
-    .start-button { font-size: 12px; }
+footer strong { color:#aaa; }
+@media (max-width:480px) {
+    body { padding:15px; }
+    .logo { width:36px;height:36px;font-size:22px; }
+    .brand-name { font-size:17px; }
+    .brand-sub { font-size:8px;letter-spacing:1px; }
+    .fw-badge { font-size:8px;padding:8px 6px; }
+    main { padding:40px 0; }
+    h1 { font-size:42px; }
+    .panel { padding:20px 17px; }
+    #status { font-size:20px; }
+    .start-button { font-size:12px; }
 }
-
-@media (max-height: 520px) {
-    main { padding: 20px 0; }
-    h1 { margin-top: 12px; font-size: 36px; }
-    .panel { margin-top: 18px; }
+@media (max-height:520px) {
+    main { padding:20px 0; }
+    h1 { margin-top:12px;font-size:36px; }
+    .panel { margin-top:18px; }
 }
-
-@media (prefers-reduced-motion: reduce) {
-    *, *:before, *:after {
-        transition: none !important;
-    }
+@media (prefers-reduced-motion:reduce) {
+    *,*:before,*:after { transition:none !important; }
 }
 </style>
 </head>
@@ -359,12 +324,8 @@ footer strong { color: #aaa; }
 
 <main>
     <div class="eyebrow">SISTEMA DE INICIALIZAÇÃO</div>
-
     <h1>SEU CONSOLE.<br><span>DESBLOQUEADO.</span></h1>
-
-    <p class="intro">
-    MULTI FIRMWARE 5.05 - 14.02
-</p>
+    <p class="intro">MULTI FIRMWARE 5.05 - 14.02</p>
 
     <section class="panel">
         <div class="panel-label">
@@ -381,27 +342,19 @@ footer strong { color: #aaa; }
             <span id="percent">0%</span>
         </div>
 
-        <div
-            class="progress-track"
-            role="progressbar"
-            aria-label="Carregamento dos arquivos"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            aria-valuenow="0"
-            id="progress-track"
-        >
+        <div class="progress-track" role="progressbar"
+             aria-label="Carregamento dos arquivos"
+             aria-valuemin="0" aria-valuemax="100"
+             aria-valuenow="0" id="progress-track">
             <div class="progress" id="progress"></div>
         </div>
 
         <div class="start-wrap">
             <button class="start-button" id="start" type="button">
-    <span class="x-icon">X</span>
-    <span>APERTE X PARA COMEÇAR</span>
-</button>
-
-<div class="hint" id="hint">
-    SELECIONE O BOTÃO PARA INICIAR
-</div>
+                <span class="x-icon">X</span>
+                <span>APERTE X PARA COMEÇAR</span>
+            </button>
+            <div class="hint" id="hint">SELECIONE O BOTÃO PARA INICIAR</div>
         </div>
     </section>
 
@@ -438,11 +391,11 @@ footer strong { color: #aaa; }
     var button = document.getElementById("start");
     var hint = document.getElementById("hint");
 
-    function setProgress(value) {
+    function setProgress(value, label) {
         value = Math.max(0, Math.min(100, value));
         progressEl.style.width = value + "%";
-        percentEl.textContent = value + "%";
         trackEl.setAttribute("aria-valuenow", value);
+        percentEl.textContent = label || (value + "%");
     }
 
     function setStatus(title, detail) {
@@ -458,9 +411,14 @@ footer strong { color: #aaa; }
     function fail(title, detail) {
         setStatus(title, detail);
         button.disabled = false;
-        button.innerHTML = "↻ TENTAR NOVAMENTE";
+        button.innerHTML = '<span class="x-icon">X</span><span>TENTAR NOVAMENTE</span>';
         hint.textContent = "VERIFIQUE OS ARQUIVOS E TENTE NOVAMENTE";
         started = false;
+    }
+
+    function absolutePath(path) {
+        /* Os arquivos ficam na raiz do site GitHub Pages. */
+        return new URL("/" + path.replace(/^\/+/, ""), window.location.href).href;
     }
 
     function isCacheEmpty() {
@@ -476,31 +434,34 @@ footer strong { color: #aaa; }
 
     function loadScript(src, isModule, onLoad) {
         var script = document.createElement("script");
-        script.src = src;
-        script.onerror = function () {
-            fail(
-                "Falha ao carregar arquivo",
-                "Não foi possível carregar: " + src
-            );
-        };
+        script.src = absolutePath(src);
 
         if (isModule) {
             script.type = "module";
         }
 
-        if (onLoad) {
-            script.onload = onLoad;
-        }
+        script.onerror = function () {
+            fail(
+                "Falha ao carregar arquivo",
+                "Não foi possível carregar " + src +
+                ". Confira se o arquivo existe no GitHub."
+            );
+        };
+
+        script.onload = function () {
+            if (onLoad) onLoad();
+        };
 
         document.head.appendChild(script);
     }
 
     function beginHost() {
         if (started) return;
+
         started = true;
         button.disabled = true;
-        button.textContent = "INICIALIZANDO...";
-        hint.textContent = "NÃO FECHE O NAVEGADOR";
+        button.innerHTML = '<span class="x-icon">X</span><span>INICIALIZANDO...</span>';
+        hint.textContent = "AGUARDE A RESPOSTA DO HOST";
 
         if (!isPS4) {
             fail(
@@ -546,39 +507,56 @@ footer strong { color: #aaa; }
             return;
         }
 
-        setStep(25, "Preparando ambiente", "Selecionando os arquivos do firmware.");
+        setStep(25, "Preparando ambiente",
+                "Selecionando os arquivos do firmware.");
 
+        /*
+         * Mantém a etapa de cache, mas usa URL absoluta
+         * para evitar redirecionamento para uma pasta errada.
+         */
         if (isCacheEmpty()) {
-            setStep(40, "Preparando cache offline", "Abrindo a página de cache correspondente.");
-            window.location.replace(cachePage);
+            setStep(40, "Preparando cache offline",
+                    "Abrindo a página de cache correspondente.");
+
+            window.location.href = absolutePath(cachePage);
             return;
         }
 
-        setStep(55, "Carregando arquivos", "Solicitando os arquivos do host.");
+        setStep(55, "Carregando arquivos",
+                "Solicitando os arquivos do host.");
 
         loadScript(scriptPath, isModule, function () {
-            setProgress(100);
-            setStatus("Arquivos carregados", "O script foi carregado. A conclusão do processo depende da resposta do host.");
-            button.textContent = "PROCESSO INICIADO";
+            button.innerHTML = '<span class="x-icon">X</span><span>PROCESSO INICIADO</span>';
             hint.textContent = "AGUARDE A RESPOSTA DO HOST";
 
             if (fwNum >= 10.00 && fwNum <= 11.02) {
-                setStatus("Preparando execução", "Aguardando a inicialização do módulo.");
+                setStatus("Preparando execução",
+                          "Aguardando a inicialização do módulo.");
+
                 window.setTimeout(function () {
                     if (typeof window.doJb === "function") {
                         try {
                             window.doJb();
                         } catch (e) {
-                            fail("Erro na execução", "O módulo retornou um erro.");
+                            fail("Erro na execução",
+                                 "O módulo retornou um erro.");
                         }
                     } else {
                         fail(
                             "Módulo não inicializado",
-                            "O arquivo foi carregado, mas a função doJb não foi encontrada."
+                            "O arquivo carregou, mas a função doJb não foi encontrada."
                         );
                     }
                 }, 500);
+
+                return;
             }
+
+            setProgress(100, "GoldHEN");
+            setStatus(
+                "Arquivos carregados",
+                "O script foi carregado. A confirmação do desbloqueio depende da resposta do host."
+            );
         });
     }
 
@@ -586,9 +564,15 @@ footer strong { color: #aaa; }
     headerFw.textContent = isPS4 ? "PS4 • " + fwVersion : "PS4 HOST";
 
     if (isPS4) {
-        setStatus("Sistema identificado", "Firmware " + fwVersion + " detectado. Pronto para iniciar.");
+        setStatus(
+            "Sistema identificado",
+            "Firmware " + fwVersion + " detectado. Pronto para iniciar."
+        );
     } else {
-        setStatus("Aguardando início", "Abra no navegador do PS4 para detectar o firmware.");
+        setStatus(
+            "Aguardando início",
+            "Abra no navegador do PS4 para detectar o firmware."
+        );
         detailEl.textContent = "Este host foi preparado para PlayStation 4.";
     }
 
@@ -601,7 +585,7 @@ footer strong { color: #aaa; }
             event.keyCode === 13 ||
             event.keyCode === 32
         ) {
-            if (!started) {
+            if (!started && !button.disabled) {
                 event.preventDefault();
                 beginHost();
             }
