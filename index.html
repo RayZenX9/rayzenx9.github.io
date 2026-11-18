@@ -149,6 +149,7 @@ h1 span { color:var(--red); }
 }
 .start-button:active { background:#b90c22; }
 .start-button:disabled { opacity:.75;cursor:default; }
+.start-button.finished { opacity:1;cursor:default; }
 .x-icon {
     display:flex;width:30px;height:30px;margin:0;padding:0;
     align-items:center;justify-content:center;
@@ -297,12 +298,15 @@ footer strong { color:#aaa; }
 
     function setButton(label, showX, disabled) {
         button.innerHTML = "";
+        button.classList.remove("finished");
+
         if (showX) {
             var icon = document.createElement("span");
             icon.className = "x-icon";
             icon.textContent = "X";
             button.appendChild(icon);
         }
+
         var text = document.createElement("span");
         text.textContent = label;
         button.appendChild(text);
@@ -349,9 +353,10 @@ footer strong { color:#aaa; }
 
     function finish() {
         setProgress(100, "100%");
-        setStatus("Finalizado", "O arquivo foi carregado.");
+        setStatus("Finalizado", "O script foi carregado.");
         setButton("FINALIZADO", false, true);
-        hint.textContent = "PROCESSO CONCLUÍDO";
+        button.classList.add("finished");
+        hint.textContent = "AGUARDE O GOLDHEN INICIAR";
         started = true;
     }
 
@@ -360,7 +365,7 @@ footer strong { color:#aaa; }
 
         started = true;
         setButton("INICIALIZANDO...", true, true);
-        hint.textContent = "AGUARDE A RESPOSTA DO HOST";
+        hint.textContent = "AGUARDE O GOLDHEN INICIAR";
 
         if (!isPS4) {
             fail(
@@ -402,13 +407,14 @@ footer strong { color:#aaa; }
 
         setStep(35, "Preparando ambiente",
             "Selecionando os arquivos do firmware.");
+
         setStep(55, "Carregando arquivos",
-            "Carregando os componentes do sistema.");
+            "Aguarde o GoldHEN iniciar.");
 
         loadScript(scriptPath, isModule, function () {
             if (fwNum >= 10.00 && fwNum <= 11.02) {
                 setStatus("Preparando execução",
-                    "Aguardando a inicialização do módulo.");
+                    "Aguarde o GoldHEN iniciar.");
 
                 window.setTimeout(function () {
                     if (typeof window.doJb === "function") {
@@ -416,8 +422,10 @@ footer strong { color:#aaa; }
                             window.doJb();
                             finish();
                         } catch (e) {
-                            fail("Erro na execução",
-                                "O módulo retornou um erro.");
+                            fail(
+                                "Erro na execução",
+                                "O módulo retornou um erro."
+                            );
                         }
                     } else {
                         fail(
