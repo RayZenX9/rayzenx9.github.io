@@ -42,10 +42,9 @@
             <span id="percent">0%</span>
         </div>
 
-        <div class="progress-track" role="progressbar"
-             aria-label="Progresso da inicialização"
-             aria-valuemin="0" aria-valuemax="100"
-             aria-valuenow="0" id="progress-track">
+        <div class="progress-track" id="progress-track"
+             role="progressbar" aria-valuemin="0"
+             aria-valuemax="100" aria-valuenow="0">
             <div class="progress" id="progress"></div>
         </div>
 
@@ -74,43 +73,54 @@
 (function () {
     "use strict";
 
-    var started = false;
     var ua = navigator.userAgent || "";
     var match = ua.match(/PlayStation 4[ /]([\d.]+)/i);
-    var isPS4 = !!match;
-    var fwVersion = isPS4 ? match[1] : "Não detectado";
-    var fwNum = isPS4 ? parseFloat(fwVersion) : NaN;
+    var firmware = match ? match[1] : "Não detectado";
+    var fw = match ? parseFloat(match[1]) : NaN;
+    var started = false;
 
-    var statusEl = document.getElementById("status");
-    var detailEl = document.getElementById("detail");
+    var status = document.getElementById("status");
+    var detail = document.getElementById("detail");
     var firmwareEl = document.getElementById("firmware");
     var headerFw = document.getElementById("header-fw");
-    var progressEl = document.getElementById("progress");
-    var percentEl = document.getElementById("percent");
-    var trackEl = document.getElementById("progress-track");
+    var progress = document.getElementById("progress");
+    var progressTrack = document.getElementById("progress-track");
+    var percent = document.getElementById("percent");
     var button = document.getElementById("start");
     var hint = document.getElementById("hint");
 
-    function setProgress(value, label) {
-        value = Math.max(0, Math.min(100, value));
-        progressEl.style.width = value + "%";
-        trackEl.setAttribute("aria-valuenow", value);
-        percentEl.textContent = label || value + "%";
+    function updateProgress(value) {
+        progress.style.width = value + "%";
+        percent.textContent = value + "%";
+        progressTrack.setAttribute("aria-valuenow", value);
     }
 
-    function setStatus(title, detail) {
-        statusEl.textContent = title;
-        detailEl.textContent = detail;
+    function updateStatus(title, message) {
+        status.textContent = title;
+        detail.textContent = message;
     }
 
-    function setStep(value, title, detail) {
-        setProgress(value);
-        setStatus(title, detail);
+    function getPaths() {
+        if (fw === 5.05 || fw === 5.07) {
+            return { cache: "cache505.html" };
+        }
+        if (fw >= 7.00 && fw <= 8.52) {
+            return { cache: "cache700.html" };
+        }
+        if (fw >= 9.00 && fw <= 9.60) {
+            return { cache: "cache900.html" };
+        }
+        if (fw >= 10.00 && fw <= 11.02) {
+            return { cache: "cachecss.html" };
+        }
+        if (fw >= 11.50 && fw <= 14.02) {
+            return { cache: "cacheslopkit.html" };
+        }
+        return null;
     }
 
     function setButton(label, showX, disabled) {
-        button.innerHTML = "";
-        button.classList.remove("finished");
+        button.replaceChildren();
 
         if (showX) {
             var icon = document.createElement("span");
@@ -125,236 +135,96 @@
         button.disabled = !!disabled;
     }
 
-    function fail(title, detail) {
-        setStatus(title, detail);
+    function fail(title, message) {
+        updateStatus(title, message);
         setButton("TENTAR NOVAMENTE", true, false);
         hint.textContent = "VERIFIQUE OS ARQUIVOS E TENTE NOVAMENTE";
         started = false;
     }
 
-    function getFirmwarePaths() {
-        if (fwNum === 5.05 || fwNum === 5.07) {
-            return {
-                cache: "cache505.html",
-                script: "505/exploit.js",
-                module: false
-            };
-        }
-
-        if (fwNum >= 7.00 && fwNum <= 8.52) {
-            return {
-                cache: "cache700.html",
-                script: "700/alert.js",
-                module: true
-            };
-        }
-
-        if (fwNum >= 9.00 && fwNum <= 9.60) {
-            return {
-                cache: "cache900.html",
-                script: "900/alert.js",
-                module: true
-            };
-        }
-
-        if (fwNum >= 10.00 && fwNum <= 11.02) {
-            return {
-                cache: "cachecss.html",
-                script: "css/main.js",
-                module: false
-            };
-        }
-
-        if (fwNum === 11.50 || fwNum === 11.52) {
-            return {
-                cache: "cacheslopkit.html",
-                script: "slopkit/chain_lapse.js",
-                module: true
-            };
-        }
-
-        if (fwNum >= 12.00 && fwNum <= 14.02) {
-            return {
-                cache: "cacheslopkit.html",
-                script: "slopkit/jb.js",
-                module: true
-            };
-        }
-
-        return null;
-    }
-
-    function rootPath(path) {
-        return new URL(
-            path.replace(/^\/+/, ""),
-            document.baseURI
-        ).href;
-    }
-
-    function loadScript(src, isModule, onLoad) {
-        var script = document.createElement("script");
-        script.src = rootPath(src);
-        script.async = true;
-
-        if (isModule) {
-            script.type = "module";
-        }
-
-        script.onerror = function () {
-            fail(
-                "Falha ao carregar arquivo",
-                "Não foi possível carregar " + src +
-                ". Confira se o arquivo existe no GitHub."
-            );
-        };
-
-        script.onload = function () {
-            if (typeof onLoad === "function") {
-                onLoad();
-            }
-        };
-
-        document.head.appendChild(script);
-    }
-
-    function finish() {
-        setProgress(100, "100%");
-        setStatus("Script carregado", "Aguarde o GoldHEN iniciar.");
-        setButton("FINALIZADO", false, true);
-        button.classList.add("finished");
-        hint.textContent = "AGUARDE O GOLDHEN INICIAR";
-        started = true;
-    }
-
     function beginHost() {
         if (started) return;
 
-        if (!isPS4) {
+        if (!match) {
             fail(
                 "Console não identificado",
-                "Abra este host no navegador do PlayStation 4."
+                "Abra esta página no navegador do PlayStation 4."
             );
             return;
         }
 
-        var paths = getFirmwarePaths();
+        var paths = getPaths();
 
         if (!paths) {
             fail(
                 "Firmware não compatível",
-                "Versão detectada: " + fwVersion
+                "Firmware detectado: " + firmware
+            );
+            return;
+        }
+
+        var appCache = window.applicationCache;
+
+        if (!appCache) {
+            fail(
+                "Cache indisponível",
+                "O navegador não disponibilizou a API de cache offline."
             );
             return;
         }
 
         started = true;
-        setButton("INICIALIZANDO...", true, true);
-        hint.textContent = "AGUARDE O GOLDHEN INICIAR";
-
-        setStep(
-            10,
+        setButton("PREPARANDO CACHE...", false, true);
+        updateProgress(20);
+        updateStatus(
             "Firmware detectado",
-            "Versão identificada: " + fwVersion
+            "Firmware " + firmware + " identificado."
         );
 
         /*
-         * Mantém o fluxo de cache existente.
-         * O status 0 significa UNCACHED.
+         * O status UNCACHED indica que a página
+         * ainda não possui cache offline.
          */
-        var appCache = window.applicationCache;
-
-        if (appCache && appCache.status === 0) {
-            setStep(
-                20,
-                "Preparando instalação",
-                "Abrindo a página de preparação do sistema."
+        if (appCache.status === 0) {
+            updateProgress(40);
+            updateStatus(
+                "Instalação do cache",
+                "Abrindo a página de instalação correspondente."
             );
 
-            window.location.href = rootPath(paths.cache);
+            window.location.href = new URL(
+                paths.cache,
+                document.baseURI
+            ).href;
             return;
         }
 
-        setStep(
-            35,
-            "Preparando ambiente",
-            "Selecionando os arquivos do firmware."
+        updateProgress(100);
+        updateStatus(
+            "Cache já disponível",
+            "Feche e abra novamente o navegador do PS4 para continuar."
         );
-
-        setStep(
-            55,
-            "Carregando arquivos",
-            "Aguarde o GoldHEN iniciar."
-        );
-
-        loadScript(paths.script, paths.module, function () {
-            if (fwNum >= 10.00 && fwNum <= 11.02) {
-                setStatus(
-                    "Preparando execução",
-                    "Aguarde o GoldHEN iniciar."
-                );
-
-                window.setTimeout(function () {
-                    if (typeof window.doJb === "function") {
-                        try {
-                            window.doJb();
-                            finish();
-                        } catch (e) {
-                            fail(
-                                "Erro na execução",
-                                "O módulo retornou um erro."
-                            );
-                        }
-                    } else {
-                        fail(
-                            "Módulo não inicializado",
-                            "A função doJb não foi encontrada."
-                        );
-                    }
-                }, 500);
-
-                return;
-            }
-
-            finish();
-        });
+        setButton("FINALIZADO", false, true);
+        button.classList.add("finished");
+        hint.textContent = "FECHE E ABRA NOVAMENTE O NAVEGADOR";
     }
 
-    firmwareEl.textContent = fwVersion;
+    firmwareEl.textContent = firmware;
+    headerFw.textContent = match ? "PS4 • " + firmware : "PS4 HOST";
 
-    headerFw.textContent = isPS4
-        ? "PS4 • " + fwVersion
-        : "PS4 HOST";
-
-    if (isPS4) {
-        setStatus(
+    if (match) {
+        updateStatus(
             "Sistema identificado",
-            "Firmware " + fwVersion + " detectado. Pronto para iniciar."
+            "Firmware " + firmware + " detectado. Pronto para iniciar."
         );
     } else {
-        setStatus(
+        updateStatus(
             "Aguardando início",
-            "Abra no navegador do PS4 para detectar o firmware."
+            "Abra este host no navegador do PS4."
         );
-
-        detailEl.textContent =
-            "Este host foi preparado para PlayStation 4.";
     }
 
     button.addEventListener("click", beginHost);
-
-    document.addEventListener("keydown", function (event) {
-        if (
-            event.key === "Enter" ||
-            event.key === " " ||
-            event.keyCode === 13 ||
-            event.keyCode === 32
-        ) {
-            if (!started && !button.disabled) {
-                event.preventDefault();
-                beginHost();
-            }
-        }
-    });
 })();
 </script>
 </body>
