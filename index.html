@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -234,7 +233,7 @@ h1 span { color: var(--red); }
     border-radius: inherit;
     background: linear-gradient(90deg, #a90018, var(--red), #ff8491);
     box-shadow: 0 0 14px rgba(255,38,63,.55);
-    transition: width .2s ease;
+    transition: width .35s ease;
 }
 
 .start-wrap {
@@ -257,7 +256,9 @@ h1 span { color: var(--red); }
     cursor: pointer;
 }
 
-.start-button:active { background: #b90c22; }
+.start-button:active {
+    background: #b90c22;
+}
 
 .start-button:disabled {
     opacity: .55;
@@ -398,7 +399,7 @@ footer strong { color: #aaa; }
                 APERTE X PARA COMEÇAR
             </button>
             <div class="hint" id="hint">
-                PRESSIONE X NO CONTROLE OU SELECIONE O BOTÃO
+                SELECIONE O BOTÃO PARA INICIAR
             </div>
         </div>
     </section>
@@ -439,8 +440,8 @@ footer strong { color: #aaa; }
     function setProgress(value) {
         value = Math.max(0, Math.min(100, value));
         progressEl.style.width = value + "%";
-        trackEl.setAttribute("aria-valuenow", value);
         percentEl.textContent = value + "%";
+        trackEl.setAttribute("aria-valuenow", value);
     }
 
     function setStatus(title, detail) {
@@ -456,7 +457,7 @@ footer strong { color: #aaa; }
     function fail(title, detail) {
         setStatus(title, detail);
         button.disabled = false;
-        button.textContent = "↻ TENTAR NOVAMENTE";
+        button.innerHTML = "↻ TENTAR NOVAMENTE";
         hint.textContent = "VERIFIQUE OS ARQUIVOS E TENTE NOVAMENTE";
         started = false;
     }
@@ -474,11 +475,7 @@ footer strong { color: #aaa; }
 
     function loadScript(src, isModule, onLoad) {
         var script = document.createElement("script");
-
-        if (isModule) {
-            script.type = "module";
-        }
-
+        script.src = src;
         script.onerror = function () {
             fail(
                 "Falha ao carregar arquivo",
@@ -486,17 +483,19 @@ footer strong { color: #aaa; }
             );
         };
 
-        script.onload = function () {
-            if (onLoad) onLoad();
-        };
+        if (isModule) {
+            script.type = "module";
+        }
 
-        script.src = src;
+        if (onLoad) {
+            script.onload = onLoad;
+        }
+
         document.head.appendChild(script);
     }
 
     function beginHost() {
         if (started) return;
-
         started = true;
         button.disabled = true;
         button.textContent = "INICIALIZANDO...";
@@ -510,11 +509,7 @@ footer strong { color: #aaa; }
             return;
         }
 
-        setStep(
-            10,
-            "Firmware detectado",
-            "Versão identificada: " + fwVersion
-        );
+        setStep(10, "Firmware detectado", "Versão identificada: " + fwVersion);
 
         var cachePage = "";
         var scriptPath = "";
@@ -550,47 +545,30 @@ footer strong { color: #aaa; }
             return;
         }
 
-        setStep(
-            25,
-            "Preparando ambiente",
-            "Selecionando os arquivos do firmware."
-        );
+        setStep(25, "Preparando ambiente", "Selecionando os arquivos do firmware.");
 
         if (isCacheEmpty()) {
-            setStep(
-                40,
-                "Preparando cache offline",
-                "Abrindo a página de cache correspondente."
-            );
+            setStep(40, "Preparando cache offline", "Abrindo a página de cache correspondente.");
             window.location.replace(cachePage);
             return;
         }
 
-        setStep(
-            55,
-            "Carregando arquivos",
-            "Solicitando os arquivos do host."
-        );
+        setStep(55, "Carregando arquivos", "Solicitando os arquivos do host.");
 
         loadScript(scriptPath, isModule, function () {
+            setProgress(100);
+            setStatus("Arquivos carregados", "O script foi carregado. A conclusão do processo depende da resposta do host.");
             button.textContent = "PROCESSO INICIADO";
             hint.textContent = "AGUARDE A RESPOSTA DO HOST";
 
             if (fwNum >= 10.00 && fwNum <= 11.02) {
-                setStatus(
-                    "Preparando execução",
-                    "Aguardando a inicialização do módulo."
-                );
-
+                setStatus("Preparando execução", "Aguardando a inicialização do módulo.");
                 window.setTimeout(function () {
                     if (typeof window.doJb === "function") {
                         try {
                             window.doJb();
                         } catch (e) {
-                            fail(
-                                "Erro na execução",
-                                "O módulo retornou um erro."
-                            );
+                            fail("Erro na execução", "O módulo retornou um erro.");
                         }
                     } else {
                         fail(
@@ -599,16 +577,7 @@ footer strong { color: #aaa; }
                         );
                     }
                 }, 500);
-
-                return;
             }
-
-            setProgress(100);
-            percentEl.textContent = "GoldHEN iniciado";
-            setStatus(
-                "Arquivos carregados",
-                "Script carregado. A confirmação do desbloqueio depende da resposta do host."
-            );
         });
     }
 
@@ -616,17 +585,10 @@ footer strong { color: #aaa; }
     headerFw.textContent = isPS4 ? "PS4 • " + fwVersion : "PS4 HOST";
 
     if (isPS4) {
-        setStatus(
-            "Sistema identificado",
-            "Firmware " + fwVersion + " detectado. Pronto para iniciar."
-        );
+        setStatus("Sistema identificado", "Firmware " + fwVersion + " detectado. Pronto para iniciar.");
     } else {
-        setStatus(
-            "Aguardando início",
-            "Abra no navegador do PS4 para detectar o firmware."
-        );
-        detailEl.textContent =
-            "Este host foi preparado para PlayStation 4.";
+        setStatus("Aguardando início", "Abra no navegador do PS4 para detectar o firmware.");
+        detailEl.textContent = "Este host foi preparado para PlayStation 4.";
     }
 
     button.addEventListener("click", beginHost);
