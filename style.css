@@ -1,13 +1,15 @@
 
 /* ==========================================
    RAYZENX — PS4 HOST
-   Premium Black & Red Interface
+   Premium Black & Red Design
    ========================================== */
 
 :root {
     --bg: #080808;
     --panel: #101010;
     --red: #ff263f;
+    --red-dark: #d90d29;
+    --red-light: #ff8793;
     --white: #f5f5f5;
     --muted: #888;
     --line: rgba(255, 255, 255, .1);
@@ -15,7 +17,6 @@
 
 * {
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -33,16 +34,21 @@ body {
     flex-direction: column;
     padding: 20px;
     overflow-x: hidden;
+
     background:
         radial-gradient(
             ellipse at 50% 35%,
             rgba(255, 38, 63, .10),
             transparent 55%
         ),
-        linear-gradient(145deg, #101010, #050505 70%);
+        linear-gradient(
+            145deg,
+            #101010,
+            #050505 70%
+        );
 }
 
-/* LINHA VERMELHA SUPERIOR */
+/* Brilho superior */
 
 .top-glow {
     position: fixed;
@@ -51,18 +57,21 @@ body {
     left: 0;
     width: 100%;
     height: 3px;
+
     background: linear-gradient(
         90deg,
         transparent,
         var(--red),
-        #ff8793,
+        var(--red-light),
         var(--red),
         transparent
     );
+
     box-shadow: 0 0 20px rgba(255, 38, 63, .5);
+    pointer-events: none;
 }
 
-/* CABEÇALHO */
+/* Cabeçalho */
 
 header,
 footer {
@@ -92,12 +101,14 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+
     border: 1px solid rgba(255, 38, 63, .65);
     border-radius: 10px;
+
     color: var(--red);
     font-size: 26px;
     font-weight: 900;
+
     background: #16090b;
     box-shadow: 0 0 25px rgba(255, 38, 63, .08);
 }
@@ -124,13 +135,14 @@ header {
     padding: 9px 11px;
     border: 1px solid var(--line);
     border-radius: 6px;
+
     color: #aaa;
     font-size: 10px;
     letter-spacing: 1px;
     white-space: nowrap;
 }
 
-/* CONTEÚDO PRINCIPAL */
+/* Conteúdo principal */
 
 main {
     width: 100%;
@@ -150,9 +162,9 @@ main {
 
 h1 {
     margin: 22px 0 14px;
-    color: var(--white);
     text-align: center;
-    font-size: clamp(38px, 8vw, 64px);
+
+    font-size: 64px;
     font-weight: 900;
     letter-spacing: -2px;
     line-height: 1.03;
@@ -165,31 +177,31 @@ h1 span {
 .intro {
     max-width: 430px;
     margin: 0 auto;
+
     color: #999;
     text-align: center;
     font-size: 13px;
     line-height: 1.8;
 }
 
-p {
-    color: #999;
-    line-height: 1.7;
-}
-
-small {
-    color: var(--muted);
-}
-
-/* PAINEL DE STATUS */
+/* Painel de status */
 
 .panel {
     position: relative;
+    overflow: hidden;
+
     margin-top: 35px;
     padding: 25px;
-    overflow: hidden;
+
     border: 1px solid rgba(255, 38, 63, .23);
     border-radius: 13px;
-    background: linear-gradient(140deg, #151515, #0c0c0c);
+
+    background: linear-gradient(
+        140deg,
+        #151515,
+        #0c0c0c
+    );
+
     box-shadow: 0 25px 70px rgba(0, 0, 0, .4);
 }
 
@@ -200,13 +212,20 @@ small {
     left: 0;
     width: 3px;
     height: 100%;
-    background: linear-gradient(var(--red), transparent);
+
+    background: linear-gradient(
+        var(--red),
+        transparent
+    );
+
+    pointer-events: none;
 }
 
 .panel-label {
     display: flex;
     align-items: center;
     gap: 9px;
+
     color: #999;
     font-size: 10px;
     font-weight: bold;
@@ -218,15 +237,14 @@ small {
     height: 7px;
     flex-shrink: 0;
     border-radius: 50%;
+
     background: var(--red);
     box-shadow: 0 0 10px var(--red);
 }
 
-/* STATUS E DETALHES */
-
 #status {
     margin: 20px 0 8px;
-    color: var(--white);
+
     font-size: 22px;
     line-height: 1.4;
     font-weight: 800;
@@ -235,28 +253,21 @@ small {
 
 #detail {
     min-height: 34px;
+
     color: #929292;
     font-size: 12px;
     line-height: 1.7;
     overflow-wrap: anywhere;
 }
 
-.status,
-.loading,
-.loading-text {
-    color: var(--red);
-    font-weight: 700;
-}
-
-/* INFORMAÇÕES DO FIRMWARE */
+/* Firmware e progresso */
 
 .fw-info {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
     gap: 12px;
     margin-top: 22px;
+
     color: #777;
     font-size: 10px;
     letter-spacing: 1px;
@@ -266,41 +277,34 @@ small {
     color: #eee;
 }
 
-#firmware {
-    overflow-wrap: anywhere;
-}
-
-#percent {
-    color: var(--red);
-    font-weight: bold;
-}
-
-/* BARRA DE PROGRESSO */
-
 .progress-track {
     width: 100%;
     height: 5px;
     margin-top: 12px;
-    overflow: hidden;
+
     border-radius: 5px;
+    overflow: hidden;
     background: #292929;
 }
 
 .progress {
     width: 0%;
     height: 100%;
+
     border-radius: inherit;
+
     background: linear-gradient(
         90deg,
         #a90018,
         var(--red),
         #ff8491
     );
+
     box-shadow: 0 0 14px rgba(255, 38, 63, .55);
     transition: width .35s ease;
 }
 
-/* BOTÃO DE INICIALIZAÇÃO */
+/* Botão de inicialização */
 
 .start-wrap {
     margin-top: 25px;
@@ -308,25 +312,35 @@ small {
 }
 
 .start-button {
+    width: 100%;
+    min-height: 62px;
+    padding: 14px 18px;
+
+    border: 1px solid #ff5265;
+    border-radius: 8px;
+
+    background: linear-gradient(
+        110deg,
+        var(--red-dark),
+        var(--red)
+    );
+
+    color: #fff;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+
+    box-shadow: 0 8px 28px rgba(255, 38, 63, .18);
+
+    cursor: pointer;
+
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 14px;
-    width: 100%;
-    min-height: 62px;
-    padding: 14px 18px;
-    border: 1px solid #ff5265;
-    border-radius: 8px;
-    background: linear-gradient(110deg, #d90d29, #ff263f);
-    color: white;
-    font-size: 14px;
-    font-weight: 900;
-    letter-spacing: 1.2px;
-    box-shadow: 0 8px 28px rgba(255, 38, 63, .18);
-    cursor: pointer;
+    gap: 8px;
+
     text-align: center;
-    text-transform: uppercase;
 }
 
 .start-button:active {
@@ -338,40 +352,38 @@ small {
     cursor: default;
 }
 
-/* X À ESQUERDA DO TEXTO */
+/* Ícone X à esquerda do texto */
 
 .x-icon {
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-shrink: 0;
+
     width: 30px;
     height: 30px;
     margin: 0;
     padding: 0;
+
+    align-items: center;
+    justify-content: center;
+
     border: 1px solid rgba(255, 255, 255, .7);
     border-radius: 50%;
-    color: white;
+
     font-size: 17px;
     font-weight: bold;
     line-height: 1;
     text-align: center;
 }
 
-.start-button span:not(.x-icon) {
-    flex: 1;
-    text-align: center;
-}
-
 .hint {
     margin-top: 12px;
+
     color: #777;
     font-size: 10px;
     letter-spacing: 1px;
-    line-height: 1.6;
 }
 
-/* RECURSOS */
+/* Recursos */
 
 .features {
     display: flex;
@@ -383,8 +395,10 @@ small {
 
 .feature {
     padding: 9px 11px;
+
     border: 1px solid var(--line);
     border-radius: 5px;
+
     color: #aaa;
     font-size: 9px;
     letter-spacing: .7px;
@@ -394,25 +408,16 @@ small {
     color: var(--red);
 }
 
-/* LINKS */
-
-a {
-    color: var(--red);
-    text-decoration: none;
-}
-
-a:hover {
-    color: #fff;
-}
-
-/* RODAPÉ */
+/* Rodapé */
 
 footer {
     display: flex;
     justify-content: space-between;
     gap: 12px;
+
     padding: 17px 0 3px;
     border-top: 1px solid var(--line);
+
     color: #666;
     font-size: 9px;
     letter-spacing: 1px;
@@ -422,7 +427,13 @@ footer strong {
     color: #aaa;
 }
 
-/* CELULARES */
+/* Compatibilidade com telas menores */
+
+@media (max-width: 650px) {
+    h1 {
+        font-size: 48px;
+    }
+}
 
 @media (max-width: 480px) {
     body {
@@ -445,8 +456,8 @@ footer strong {
     }
 
     .fw-badge {
-        padding: 8px 6px;
         font-size: 8px;
+        padding: 8px 6px;
     }
 
     main {
@@ -466,19 +477,9 @@ footer strong {
     }
 
     .start-button {
-        gap: 10px;
-        padding: 13px 12px;
         font-size: 12px;
     }
-
-    .x-icon {
-        width: 28px;
-        height: 28px;
-        font-size: 16px;
-    }
 }
-
-/* TELAS COM POUCA ALTURA */
 
 @media (max-height: 520px) {
     main {
@@ -494,8 +495,6 @@ footer strong {
         margin-top: 18px;
     }
 }
-
-/* REDUÇÃO DE ANIMAÇÕES */
 
 @media (prefers-reduced-motion: reduce) {
     *,
