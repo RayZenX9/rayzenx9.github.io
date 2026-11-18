@@ -320,16 +320,65 @@ footer strong { color:#aaa; }
         started = false;
     }
 
-    function absolutePath(path) {
-        return new URL(
-            "/" + path.replace(/^\/+/, ""),
-            window.location.href
-        ).href;
+    function getFirmwarePaths() {
+        if (fwNum === 5.05 || fwNum === 5.07) {
+            return {
+                cache: "cache505.html",
+                script: "505/exploit.js",
+                module: false
+            };
+        }
+
+        if (fwNum >= 7.00 && fwNum <= 8.52) {
+            return {
+                cache: "cache700.html",
+                script: "700/alert.js",
+                module: true
+            };
+        }
+
+        if (fwNum >= 9.00 && fwNum <= 9.60) {
+            return {
+                cache: "cache900.html",
+                script: "900/alert.js",
+                module: true
+            };
+        }
+
+        if (fwNum >= 10.00 && fwNum <= 11.02) {
+            return {
+                cache: "cachecss.html",
+                script: "css/main.js",
+                module: false
+            };
+        }
+
+        if (fwNum === 11.50 || fwNum === 11.52) {
+            return {
+                cache: "cacheslopkit.html",
+                script: "slopkit/chain_lapse.js",
+                module: true
+            };
+        }
+
+        if (fwNum >= 12.00 && fwNum <= 14.02) {
+            return {
+                cache: "cacheslopkit.html",
+                script: "slopkit/jb.js",
+                module: true
+            };
+        }
+
+        return null;
+    }
+
+    function rootPath(path) {
+        return new URL(path.replace(/^\/+/, ""), document.baseURI).href;
     }
 
     function loadScript(src, isModule, onLoad) {
         var script = document.createElement("script");
-        script.src = absolutePath(src);
+        script.src = rootPath(src);
         script.async = true;
 
         if (isModule) {
@@ -340,12 +389,14 @@ footer strong { color:#aaa; }
             fail(
                 "Falha ao carregar arquivo",
                 "Não foi possível carregar " + src +
-                ". Confira o nome e o caminho do arquivo."
+                ". Confira se o arquivo existe no GitHub."
             );
         };
 
         script.onload = function () {
-            if (typeof onLoad === "function") onLoad();
+            if (typeof onLoad === "function") {
+                onLoad();
+            }
         };
 
         document.head.appendChild(script);
@@ -353,7 +404,7 @@ footer strong { color:#aaa; }
 
     function finish() {
         setProgress(100, "100%");
-        setStatus("Finalizado", "O script foi carregado.");
+        setStatus("Script carregado", "Aguarde o GoldHEN iniciar.");
         setButton("FINALIZADO", false, true);
         button.classList.add("finished");
         hint.textContent = "AGUARDE O GOLDHEN INICIAR";
@@ -363,10 +414,6 @@ footer strong { color:#aaa; }
     function beginHost() {
         if (started) return;
 
-        started = true;
-        setButton("INICIALIZANDO...", true, true);
-        hint.textContent = "AGUARDE O GOLDHEN INICIAR";
-
         if (!isPS4) {
             fail(
                 "Console não identificado",
@@ -375,33 +422,35 @@ footer strong { color:#aaa; }
             return;
         }
 
-        setStep(10, "Firmware detectado",
-            "Versão identificada: " + fwVersion);
+        var paths = getFirmwarePaths();
 
-        var scriptPath = "";
-        var isModule = false;
-
-        if (fwNum === 5.05 || fwNum === 5.07) {
-            scriptPath = "505/exploit.js";
-        } else if (fwNum >= 7.00 && fwNum <= 8.52) {
-            scriptPath = "700/alert.js";
-            isModule = true;
-        } else if (fwNum >= 9.00 && fwNum <= 9.60) {
-            scriptPath = "900/alert.js";
-            isModule = true;
-        } else if (fwNum >= 10.00 && fwNum <= 11.02) {
-            scriptPath = "css/main.js";
-        } else if (fwNum === 11.50 || fwNum === 11.52) {
-            scriptPath = "slopkit/chain_lapse.js";
-            isModule = true;
-        } else if (fwNum >= 12.00 && fwNum <= 14.02) {
-            scriptPath = "slopkit/jb.js";
-            isModule = true;
-        } else {
+        if (!paths) {
             fail(
                 "Firmware não compatível",
                 "Versão detectada: " + fwVersion
             );
+            return;
+        }
+
+        started = true;
+        setButton("INICIALIZANDO...", true, true);
+        hint.textContent = "AGUARDE O GOLDHEN INICIAR";
+
+        setStep(10, "Firmware detectado",
+            "Versão identificada: " + fwVersion);
+
+        /*
+         * Mantém o fluxo de cache da index original.
+         * O status 0 significa UNCACHED.
+         * A página de cache precisa existir na raiz do site.
+         */
+        var appCache = window.applicationCache;
+
+        if (appCache && appCache.status === 0) {
+            setStep(20, "Preparando instalação",
+                "Abrindo a página de preparação do sistema.");
+
+            window.location.href = rootPath(paths.cache);
             return;
         }
 
@@ -411,7 +460,7 @@ footer strong { color:#aaa; }
         setStep(55, "Carregando arquivos",
             "Aguarde o GoldHEN iniciar.");
 
-        loadScript(scriptPath, isModule, function () {
+        loadScript(paths.script, paths.module, function () {
             if (fwNum >= 10.00 && fwNum <= 11.02) {
                 setStatus("Preparando execução",
                     "Aguarde o GoldHEN iniciar.");
@@ -434,6 +483,7 @@ footer strong { color:#aaa; }
                         );
                     }
                 }, 500);
+
                 return;
             }
 
@@ -442,7 +492,9 @@ footer strong { color:#aaa; }
     }
 
     firmwareEl.textContent = fwVersion;
-    headerFw.textContent = isPS4 ? "PS4 • " + fwVersion : "PS4 HOST";
+    headerFw.textContent = isPS4
+        ? "PS4 • " + fwVersion
+        : "PS4 HOST";
 
     if (isPS4) {
         setStatus(
