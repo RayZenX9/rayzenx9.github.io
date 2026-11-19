@@ -32,7 +32,7 @@ const params = new URLSearchParams(location.search);
 
 function hostOk() {
   var m = document.getElementById("msgs") || document.getElementById("msg");
-  if (m) m.innerHTML = "GoldHEN v2.4b18.19 Carregado ...";
+  if (m) m.innerHTML = "GoldHEN v2.4b18.14 Carregado ...";
 }
 function hostFail() {
   var m = document.getElementById("msgs") || document.getElementById("msg");
@@ -90,7 +90,7 @@ const watchdog = setInterval(function () {
    verificando após uma execução BEM-SUCEDIDA e exibia "exploit falhou" na
    tela 45s depois, sem nada de errado: num console a resposta óbvia é
    rodar novamente, o que consome uma unidade apm de um estoque que dura
-   um boot. Reportado por pengu1nsec. A flag além do clear, pois um callback
+   um boot. Reportado por RayZenX. A flag além do clear, pois um callback
    pode já estar na fila quando o intervalo termina. */
 function endWatchdog() {
   terminal = true;
@@ -394,7 +394,7 @@ let mainMf = null,
   // Padrões: afterglow + GoldHEN apenas.
   if (!params.get("afterglow")) params.set("afterglow", "1");
   if (!params.get("mode")) params.set("mode", "goldhen");
-  if (!params.get("payload")) params.set("payload", "goldhen_2.4b18.19.bin");
+  if (!params.get("payload")) params.set("payload", "goldhen_2.4b18.14.bin");
   let p = null;
 
   try {
@@ -601,12 +601,12 @@ let mainMf = null,
     )
       return;
 
-    // afterglow usa slopkit/patches/<fw>.bin (1400.bin, 1402.bin, ...).
+    // afterglow usa RayZenX/patches/<fw>.bin (1400.bin, 1402.bin, ...).
     const KPATCH_FILE = OWN_KERNEL_STAGE
-      ? "slopkit/patches/" + fwKey.replace(".", "") + ".bin"
-      : "slopkit/patches/" + (off.kpatch || fwKey.replace(".", "") + ".bin");
+      ? "RayZenX/patches/" + fwKey.replace(".", "") + ".bin"
+      : "RayZenX/patches/" + (off.kpatch || fwKey.replace(".", "") + ".bin");
     const PAYLOAD_FILE = OWN_KERNEL_STAGE
-      ? (params.get("payload") || "goldhen_2.4b18.19.bin")
+      ? (params.get("payload") || "goldhen_2.4b18.14.bin")
       : off.payload || "payload.bin";
     const needPatch = OWN_KERNEL_STAGE ? [] : ["k_sysent_661", "k_jmp_rsi"].filter(
       (k) => off[k] === undefined,
