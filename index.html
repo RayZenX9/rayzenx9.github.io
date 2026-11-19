@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -230,7 +231,7 @@ h1 span { color:var(--red); }
 }
 .start-button:active { background:#b90c22; }
 .start-button:disabled {
-    opacity:.55;
+    opacity:.75;
     cursor:default;
 }
 .x-icon {
@@ -412,6 +413,20 @@ footer strong { color:#aaa; }
             label + '</span>';
     }
 
+    function finishProcess() {
+        setProgress(100, "100%");
+        setStatus(
+            "Processo finalizado",
+            "Aguarde o GoldHEN iniciar."
+        );
+
+        button.disabled = true;
+        button.innerHTML = "<span>FINALIZADO</span>";
+
+        hint.textContent = "AGUARDE O GOLDHEN INICIAR";
+        started = true;
+    }
+
     function fail(title, detail) {
         setStatus(title, detail);
         resetButton("TENTAR NOVAMENTE");
@@ -472,30 +487,23 @@ footer strong { color:#aaa; }
         setStep(10, "Firmware detectado",
             "Versão identificada: " + fwVersion);
 
-        var cachePage = "";
         var scriptPath = "";
         var isModule = false;
 
         if (fwNum === 5.05 || fwNum === 5.07) {
-            cachePage = "cache505.html";
             scriptPath = "505/exploit.js";
         } else if (fwNum >= 7.00 && fwNum <= 8.52) {
-            cachePage = "cache700.html";
             scriptPath = "700/alert.js";
             isModule = true;
         } else if (fwNum >= 9.00 && fwNum <= 9.60) {
-            cachePage = "cache900.html";
             scriptPath = "900/alert.js";
             isModule = true;
         } else if (fwNum >= 10.00 && fwNum <= 11.02) {
-            cachePage = "cachecss.html";
             scriptPath = "css/main.js";
         } else if (fwNum === 11.50 || fwNum === 11.52) {
-            cachePage = "cacheslopkit.html";
             scriptPath = "slopkit/chain_lapse.js";
             isModule = true;
         } else if (fwNum >= 12.00 && fwNum <= 14.02) {
-            cachePage = "cacheslopkit.html";
             scriptPath = "slopkit/jb.js";
             isModule = true;
         } else {
@@ -509,12 +517,6 @@ footer strong { color:#aaa; }
         setStep(25, "Preparando ambiente",
             "Selecionando os arquivos do firmware.");
 
-        /*
-         * Não redireciona com base apenas em applicationCache.status:
-         * essa API pode não existir ou não representar o estado real
-         * do cache offline. A página de cache deve ser aberta
-         * explicitamente quando for necessário instalá-lo.
-         */
         setStep(55, "Carregando arquivos",
             "Solicitando os arquivos do host.");
 
@@ -527,6 +529,7 @@ footer strong { color:#aaa; }
                     if (typeof window.doJb === "function") {
                         try {
                             window.doJb();
+                            finishProcess();
                         } catch (e) {
                             fail("Erro na execução",
                                 "O módulo retornou um erro.");
@@ -542,15 +545,7 @@ footer strong { color:#aaa; }
                 return;
             }
 
-            setProgress(100, "100%");
-            setStatus(
-                "Arquivos carregados",
-                "O script foi carregado. Isso não confirma, por si só, que o cache ou o desbloqueio foi concluído."
-            );
-
-            resetButton("PROCESSO INICIADO");
-            hint.textContent = "VERIFIQUE A RESPOSTA DO HOST";
-            started = false;
+            finishProcess();
         });
     }
 
