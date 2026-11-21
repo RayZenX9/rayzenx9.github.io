@@ -1,0 +1,119 @@
+
+html {
+    background-image: url('img.jpg');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #24272b;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+    min-height: 100%;
+}
+
+body {
+    margin: 8px;
+    min-height: 100vh;
+    text-align: center;
+}
+
+h1 {
+    text-shadow: 0.1em 0.1em 0.2em black;
+    font-size: 25px;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+#msgs {
+    font-size: 30px;
+    margin-top: 77px;
+    margin-bottom: 455px;
+    text-shadow: 0.1em 0.1em 0.2em black;
+    color: white;
+}
+
+#progress {
+    display: block;
+}
+
+#menu {
+    display: block;
+}
+
+#crypto {
+    display: none;
+}
+
+#tools {
+    display: none;
+}
+
+#lnx {
+    display: none;
+}
+
+#mods {
+    display: none;
+}
+
+.btn {
+    background-color: #003263;
+    color: white;
+    width: 227px;
+    height: 46px;
+    padding-bottom: 5px;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-style: none;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn:hover {
+    background-color: #0069d9;
+}
+
+.btn-onln {
+    background-color: #076300;
+}
+
+.btn-onln:hover {
+    background-color: #18891b;
+}
+
+.btn-toolbox {
+    background-color: #ae2301;
+}
+
+.btn-toolbox:hover {
+    background-color: #d42a01;
+}
+
+.btn-multi {
+    background-color: #b8860b;
+}
+
+.btn-multi:hover {
+    background-color: #daa520;
+}
+
+@media screen and (max-width: 600px) {
+    #msgs {
+        font-size: 24px;
+        margin-top: 60px;
+        margin-bottom: 300px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+}
